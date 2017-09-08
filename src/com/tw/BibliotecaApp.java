@@ -9,8 +9,9 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         IO consoleIO = new ConsoleIO(System.out, new Scanner(System.in));
-        Biblioteca biblioteca = new Biblioteca(listOfBooks(), consoleIO);
-        biblioteca.run();
+        Biblioteca biblioteca = new Biblioteca(listOfBooks());
+        Menu menu = new Menu(biblioteca, consoleIO);
+        menu.run();
     }
 
     private static List<Book> listOfBooks() {

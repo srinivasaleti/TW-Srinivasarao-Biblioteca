@@ -6,6 +6,8 @@ import java.util.Scanner;
 //Represents a console for input and output
 public class ConsoleIO implements IO {
 
+    public static final String LINE_SEPARATOR = "\n";
+
     private final PrintStream out;
     private final Scanner scanner;
 
