@@ -30,7 +30,7 @@ class CommandFactoryTest {
     }
 
     @Test
-    void expectedInvalidCommand(){
+    void expectedInvalidCommand() {
         String option = "invalid";
         assertEquals(InvalidCommand.class, this.commandFactory.getCommand(option).getClass());
     }

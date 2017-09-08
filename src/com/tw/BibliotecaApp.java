@@ -10,7 +10,7 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         IO consoleIO = new ConsoleIO(System.out, new Scanner(System.in));
         Biblioteca biblioteca = new Biblioteca(listOfBooks());
-        CommandFactory commandFactory = new CommandFactory(biblioteca,consoleIO);
+        CommandFactory commandFactory = new CommandFactory(biblioteca, consoleIO);
         Menu menu = new Menu(commandFactory, consoleIO);
         menu.run();
     }
