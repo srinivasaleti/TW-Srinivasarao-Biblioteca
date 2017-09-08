@@ -15,6 +15,8 @@ public class Biblioteca {
     private static final String EMPTY = "";
     private static final String MENU_HEADER = "Menu::";
     private static final String LIST_BOOKS = "1->List Books";
+    private static final String LIST_BOOKS_OPTION = "1";
+    private static final String ENTER_YOUR_OPTION = "Enter your option::";
 
     private final IO io;
     private List<Book> books;
@@ -30,12 +32,24 @@ public class Biblioteca {
 
     public void run() {
         this.displayWelcomeMessage();
-        this.displayMenu();
-        this.displayAllBooks();
+        this.menuSelection();
     }
 
     private void displayWelcomeMessage() {
         this.io.println(WELCOME_MESSAGE);
+    }
+
+    private String readMenuOptionFromUser() {
+        this.io.print(ENTER_YOUR_OPTION);
+        return this.io.getInput();
+    }
+
+    private void menuSelection() {
+        this.displayMenu();
+        String option = readMenuOptionFromUser();
+        if (option.equals(LIST_BOOKS_OPTION)) {
+            this.displayAllBooks();
+        }
     }
 
     private void displayAllBooks() {

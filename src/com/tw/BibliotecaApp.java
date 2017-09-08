@@ -2,12 +2,13 @@ package com.tw;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 //Represents entry point for application
 public class BibliotecaApp {
 
     public static void main(String[] args) {
-        IO consoleIO = new ConsoleIO(System.out);
+        IO consoleIO = new ConsoleIO(System.out, new Scanner(System.in));
         Biblioteca biblioteca = new Biblioteca(listOfBooks(), consoleIO);
         biblioteca.run();
     }

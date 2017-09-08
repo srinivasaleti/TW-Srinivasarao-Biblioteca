@@ -24,7 +24,9 @@ class BibliotecaTest {
     @Test
     void displayWelcomeMessage() {
         String welcomeMessage = "Welcome to Bangalore Public Library";
+        String invalid = "invalid";
 
+        when(this.io.getInput()).thenReturn(invalid);
         this.biblioteca.run();
 
         verify(this.io).println(welcomeMessage);
@@ -35,10 +37,11 @@ class BibliotecaTest {
         String format = "%-35s %-35s %-35s";
         String books = "Books::";
         String header = String.format(format, "Name", "Author", "YearPublished");
+        String listBooks = "1";
 
+        when(this.io.getInput()).thenReturn(listBooks);
         this.biblioteca.run();
 
-        verify(this.io).println(header);
         assertAll(() -> {
             verify(this.io).println(books);
             verify(this.io).println(header);
@@ -50,7 +53,9 @@ class BibliotecaTest {
         Book bookInTheLibrary = mock(Book.class);
         List<Book> books = Collections.singletonList(bookInTheLibrary);
         Biblioteca biblioteca = new Biblioteca(books, this.io);
+        String listBooks = "1";
 
+        when(this.io.getInput()).thenReturn(listBooks);
         biblioteca.run();
 
         verify(bookInTheLibrary).representation();
@@ -62,7 +67,9 @@ class BibliotecaTest {
         Book anotherBookInTheLibrary = mock(Book.class);
         List<Book> books = Arrays.asList(bookInTheLibrary, anotherBookInTheLibrary);
         Biblioteca biblioteca = new Biblioteca(books, this.io);
+        String listBooks = "1";
 
+        when(this.io.getInput()).thenReturn(listBooks);
         biblioteca.run();
 
         verify(bookInTheLibrary).representation();
@@ -74,7 +81,9 @@ class BibliotecaTest {
         Book aBook = mock(Book.class);
         List<Book> books = Collections.singletonList(aBook);
         Biblioteca biblioteca = new Biblioteca(books, this.io);
+        String listBooks = "1";
 
+        when(this.io.getInput()).thenReturn(listBooks);
         biblioteca.run();
 
         verify(this.io).println(aBook.representation());
@@ -86,10 +95,11 @@ class BibliotecaTest {
         Book anotherBookInTheLibrary = mock(Book.class);
         List<Book> books = Arrays.asList(bookInTheLibrary, anotherBookInTheLibrary);
         Biblioteca biblioteca = new Biblioteca(books, this.io);
+        String listBooks = "1";
 
         when(bookInTheLibrary.representation()).thenReturn("Book1");
         when(anotherBookInTheLibrary.representation()).thenReturn("Book2");
-
+        when(this.io.getInput()).thenReturn(listBooks);
         biblioteca.run();
 
         verify(this.io).println(bookInTheLibrary.representation());
@@ -101,13 +111,43 @@ class BibliotecaTest {
         String empty = "";
         String menu = "Menu::";
         String listBooks = "1->List Books";
+        String invalid = "invalid";
 
+        when(this.io.getInput()).thenReturn(invalid);
         this.biblioteca.run();
 
         assertAll(() -> {
             verify(this.io).println(menu);
             verify(this.io).println(listBooks);
-            verify(this.io,times(2)).println(empty);
+            verify(this.io).println(empty);
+        });
+    }
+
+    @Test
+    void readMenuOptionFromUser() {
+        String enterMenuOption = "Enter your option::";
+        String listBooks = "1";
+
+        when(this.io.getInput()).thenReturn(listBooks);
+        this.biblioteca.run();
+
+        verify(this.io).print(enterMenuOption);
+        verify(this.io).getInput();
+    }
+
+    @Test
+    void shouldNotDisplayAllBooksIfUserNotSelectedListBooksOption() {
+        String format = "%-35s %-35s %-35s";
+        String books = "Books::";
+        String header = String.format(format, "Name", "Author", "YearPublished");
+        String notListBooksOption = "other";
+
+        when(this.io.getInput()).thenReturn(notListBooksOption);
+        this.biblioteca.run();
+
+        assertAll(() -> {
+            verify(this.io, never()).println(books);
+            verify(this.io, never()).println(header);
         });
     }
 
