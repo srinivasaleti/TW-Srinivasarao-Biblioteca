@@ -23,9 +23,9 @@ class MenuTest {
     @Test
     void displayWelcomeMessage() {
         String welcomeMessage = "Welcome to Bangalore Public Library";
-        String invalid = "Invalid";
+        String quit = "quit";
 
-        when(this.io.getInput()).thenReturn(invalid);
+        when(this.io.getInput()).thenReturn(quit);
         this.menu.run();
 
         verify(this.io).println(welcomeMessage);
@@ -36,13 +36,14 @@ class MenuTest {
         String format = "%-35s %-35s %-35s";
         String books = "Books::";
         String header = String.format(format, "Name", "Author", "YearPublished");
-        String userOption = "1";
+        String listBooksOption = "1";
+        String quit = "quit";
 
-        when(this.io.getInput()).thenReturn(userOption);
+        when(this.io.getInput()).thenReturn(listBooksOption, quit);
         this.menu.run();
 
         assertAll(() -> {
-            verify(this.io, times(2)).print(LINE_SEPARATOR);
+            verify(this.io, times(3)).print(LINE_SEPARATOR);
             verify(this.io).println(books);
             verify(this.io).println(header);
         });
@@ -50,9 +51,10 @@ class MenuTest {
 
     @Test
     void askBibliotecaAboutRepresentationOfAllBooksToDisplayAllBooksInIt() {
-        String userOption = "1";
+        String listBooksOption = "1";
+        String quit = "quit";
 
-        when(this.io.getInput()).thenReturn(userOption);
+        when(this.io.getInput()).thenReturn(listBooksOption, quit);
         this.menu.run();
 
         verify(biblioteca).representationOfAllBook();
@@ -60,10 +62,11 @@ class MenuTest {
 
     @Test
     void displayAllBooksInTheBiblioteca() {
-        String userOption = "1";
+        String listBooksOption = "1";
         String allBooks = "All book";
+        String quit = "quit";
 
-        when(this.io.getInput()).thenReturn(userOption);
+        when(this.io.getInput()).thenReturn(listBooksOption, quit);
         when(this.biblioteca.representationOfAllBook()).thenReturn(allBooks);
         this.menu.run();
 
@@ -72,21 +75,22 @@ class MenuTest {
 
     @Test
     void displayMenu() {
-        String userOption = "1";
+        String quit = "quit";
 
-        when(this.io.getInput()).thenReturn(userOption);
+        when(this.io.getInput()).thenReturn(quit);
         this.menu.run();
 
         verify(this.io).println("Menu::");
         verify(this.io).println("1->List Books");
+        verify(this.io).println("Type quit to Exit application");
     }
 
     @Test
     void readMenuOptionFromUser() {
         String enterMenuOption = "Enter your option::";
-        String userOption = "1";
+        String quit = "quit";
 
-        when(this.io.getInput()).thenReturn(userOption);
+        when(this.io.getInput()).thenReturn(quit);
         this.menu.run();
 
         verify(this.io).print(enterMenuOption);
@@ -96,8 +100,9 @@ class MenuTest {
     @Test
     void shouldNotDisplayBooksInLibraryIfUserNotSelectedListBooksOption() {
         String notListBooksOption = "other";
+        String quit = "quit";
 
-        when(this.io.getInput()).thenReturn(notListBooksOption);
+        when(this.io.getInput()).thenReturn(notListBooksOption, quit);
         this.menu.run();
 
         verify(this.io, never()).println(this.biblioteca.representationOfAllBook());
@@ -106,11 +111,36 @@ class MenuTest {
     @Test
     void displaySelectValidOptionWhenWeChooseInvalidOption() {
         String userOption = "invalid";
+        String quit = "quit";
+        String selectValidOption = "Select a valid option!";
 
-        when(this.io.getInput()).thenReturn(userOption);
+        when(this.io.getInput()).thenReturn(userOption, quit);
         this.menu.run();
 
-        verify(this.io).println("Select a valid option!");
+        verify(this.io).println(selectValidOption);
+    }
+
+    @Test
+    void continuouslyChoosingOptionsUntilUserChooseToQuit() {
+        String userOption = "2";
+        String quit = "quit";
+
+        when(this.io.getInput()).thenReturn(userOption, userOption, quit);
+        this.menu.run();
+
+        verify(this.io, times(3)).getInput();
+    }
+
+    @Test
+    void displayThankYouMessageWhenUserQuitTheApplication() {
+        String userOption = "2";
+        String quit = "quit";
+        String thankYouMessage = "Thank you for your valuable time";
+
+        when(this.io.getInput()).thenReturn(userOption, userOption, quit);
+        this.menu.run();
+
+        verify(this.io).println(thankYouMessage);
     }
 
 }

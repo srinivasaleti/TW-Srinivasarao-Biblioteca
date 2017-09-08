@@ -16,6 +16,9 @@ public class Menu {
     private static final String LIST_BOOKS_OPTION = "1";
     private static final String ENTER_YOUR_OPTION = "Enter your option::";
     private static final String SELECT_A_VALID_OPTION = "Select a valid option!";
+    private static final String TYPE_QUIT = "Type quit to Exit application";
+    private static final String QUIT = "quit";
+    private static final String QUIT_MESSAGE = "Thank you for your valuable time";
 
     private final IO io;
     private final Biblioteca biblioteca;
@@ -27,19 +30,25 @@ public class Menu {
 
     public void run() {
         this.displayWelcomeMessage();
-        this.displayMenu();
         this.menuSelection();
     }
 
     private void menuSelection() {
-        this.io.print(LINE_SEPARATOR);
-        String option = readMenuOptionFromUser();
-        if (option.equals(LIST_BOOKS_OPTION)) {
-            listAllBooksHeader();
-            this.io.println(this.biblioteca.representationOfAllBook());
-        } else {
-            this.io.println(SELECT_A_VALID_OPTION);
-        }
+        String option;
+        do {
+            this.io.print(LINE_SEPARATOR);
+            this.displayMenu();
+            option = readMenuOptionFromUser();
+            if (option.equals(LIST_BOOKS_OPTION)) {
+                listAllBooksHeader();
+                this.io.println(this.biblioteca.representationOfAllBook());
+            }
+            if (option.equalsIgnoreCase(QUIT)) {
+                this.io.println(QUIT_MESSAGE);
+            } else {
+                this.io.println(SELECT_A_VALID_OPTION);
+            }
+        } while (!option.equalsIgnoreCase(QUIT));
 
     }
 
@@ -51,6 +60,7 @@ public class Menu {
     private void displayMenu() {
         this.io.println(MENU_HEADER);
         this.io.println(LIST_BOOKS);
+        this.io.println(TYPE_QUIT);
     }
 
     private void displayWelcomeMessage() {
