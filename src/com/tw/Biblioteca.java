@@ -1,5 +1,7 @@
 package com.tw;
 
+import java.util.List;
+
 //Represents a library
 public class Biblioteca {
 
@@ -7,7 +9,7 @@ public class Biblioteca {
 
     private final IO io;
 
-    public Biblioteca(IO io) {
+    public Biblioteca(List<Book> books, IO io) {
         this.io = io;
     }
 

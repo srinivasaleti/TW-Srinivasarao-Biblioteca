@@ -14,7 +14,7 @@ class BibliotecaTest {
     @BeforeEach
     void setUp() {
         this.io = mock(IO.class);
-        this.biblioteca = new Biblioteca(this.io);
+        this.biblioteca = new Biblioteca(null, this.io);
     }
 
     @Test
