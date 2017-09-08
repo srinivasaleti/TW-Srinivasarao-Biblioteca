@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.*;
 
 class BibliotecaTest {
@@ -27,6 +28,21 @@ class BibliotecaTest {
         this.biblioteca.run();
 
         verify(this.io).println(welcomeMessage);
+    }
+
+    @Test
+    void displayHeaderAssociatedWithDisplayingAllBooks() {
+        String format = "%-35s %-35s %-35s";
+        String books = "Books::";
+        String header = String.format(format, "Name", "Author", "YearPublished");
+
+        this.biblioteca.run();
+
+        verify(this.io).println(header);
+        assertAll(() -> {
+            verify(this.io).println(books);
+            verify(this.io).println(header);
+        });
     }
 
     @Test
