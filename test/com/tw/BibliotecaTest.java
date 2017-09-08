@@ -96,4 +96,19 @@ class BibliotecaTest {
         verify(this.io).println(anotherBookInTheLibrary.representation());
     }
 
+    @Test
+    void displayMenu() {
+        String empty = "";
+        String menu = "Menu::";
+        String listBooks = "1->List Books";
+
+        this.biblioteca.run();
+
+        assertAll(() -> {
+            verify(this.io).println(menu);
+            verify(this.io).println(listBooks);
+            verify(this.io,times(2)).println(empty);
+        });
+    }
+
 }

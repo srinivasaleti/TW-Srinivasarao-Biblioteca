@@ -13,6 +13,8 @@ public class Biblioteca {
     private static final String AUTHOR = "Author";
     private static final String NAME = "Name";
     private static final String EMPTY = "";
+    private static final String MENU_HEADER = "Menu::";
+    private static final String LIST_BOOKS = "1->List Books";
 
     private final IO io;
     private List<Book> books;
@@ -28,6 +30,7 @@ public class Biblioteca {
 
     public void run() {
         this.displayWelcomeMessage();
+        this.displayMenu();
         this.displayAllBooks();
     }
 
@@ -46,6 +49,12 @@ public class Biblioteca {
         this.io.println(EMPTY);
         this.io.println(BOOKS_HEADER);
         this.io.println(String.format(HEADER_FORMAT, NAME, AUTHOR, YEAR_PUBLISHED));
+    }
+
+    private void displayMenu() {
+        this.io.println(EMPTY);
+        this.io.println(MENU_HEADER);
+        this.io.println(LIST_BOOKS);
     }
 
 }
