@@ -103,4 +103,14 @@ class MenuTest {
         verify(this.io, never()).println(this.biblioteca.representationOfAllBook());
     }
 
+    @Test
+    void displaySelectValidOptionWhenWeChooseInvalidOption() {
+        String userOption = "invalid";
+
+        when(this.io.getInput()).thenReturn(userOption);
+        this.menu.run();
+
+        verify(this.io).println("Select a valid option!");
+    }
+
 }

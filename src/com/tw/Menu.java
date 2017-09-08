@@ -15,6 +15,7 @@ public class Menu {
     private static final String LIST_BOOKS = "1->List Books";
     private static final String LIST_BOOKS_OPTION = "1";
     private static final String ENTER_YOUR_OPTION = "Enter your option::";
+    private static final String SELECT_A_VALID_OPTION = "Select a valid option!";
 
     private final IO io;
     private final Biblioteca biblioteca;
@@ -36,7 +37,10 @@ public class Menu {
         if (option.equals(LIST_BOOKS_OPTION)) {
             listAllBooksHeader();
             this.io.println(this.biblioteca.representationOfAllBook());
+        } else {
+            this.io.println(SELECT_A_VALID_OPTION);
         }
+
     }
 
     private String readMenuOptionFromUser() {
