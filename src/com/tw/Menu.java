@@ -1,5 +1,8 @@
 package com.tw;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static com.tw.ConsoleIO.LINE_SEPARATOR;
 
 //Represents menu for biblioteca
@@ -8,6 +11,7 @@ public class Menu {
     private static final String WELCOME_MESSAGE = "Welcome to Bangalore Public Library";
     private static final String MENU_HEADER = "Menu::";
     private static final String LIST_BOOKS = "1->List Books";
+    private static final String CHECKOUT_BOOK = "2->Checkout A Book";
     private static final String ENTER_YOUR_OPTION = "Enter your option::";
     private static final String TYPE_QUIT = "Type quit to Exit application";
     private static final String QUIT = "quit";
@@ -42,11 +46,15 @@ public class Menu {
     }
 
     private void displayMenu() {
+        List<String> options = Arrays.asList(LIST_BOOKS, CHECKOUT_BOOK, TYPE_QUIT);
+        this.displayMenuHeader();
+        options.forEach(this.io::println);
+        this.io.println(LINE_SEPARATOR);
+    }
+
+    private void displayMenuHeader() {
         this.io.print(LINE_SEPARATOR);
         this.io.println(MENU_HEADER);
-        this.io.println(LIST_BOOKS);
-        this.io.println(TYPE_QUIT);
-        this.io.print(LINE_SEPARATOR);
     }
 
     private void displayWelcomeMessage() {

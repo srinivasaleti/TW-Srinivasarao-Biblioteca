@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static com.tw.ConsoleIO.LINE_SEPARATOR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -59,6 +60,38 @@ class BibliotecaTest {
         biblioteca.representationOfAllBook();
 
         assertEquals(expected, biblioteca.representationOfAllBook());
+    }
+
+    @Test
+    void shouldCheckoutABookFromBibliotecaIfItIsAvailable() {
+        Book aBook = new Book("book1", "author1", 1996);
+        Book anotherBook = new Book("book2", "author2", 1996);
+        List<Book> books = Arrays.asList(aBook, anotherBook);
+        Biblioteca biblioteca = new Biblioteca(books);
+
+        assertEquals(Optional.of(aBook), biblioteca.checkoutABook("book1"));
+    }
+
+    @Test
+    void shouldNotCheckoutABookIfItIsNotAvailableInBiblioteca() {
+        Book aBook = new Book("book1", "author1", 1996);
+        Book anotherBook = new Book("book2", "author2", 1996);
+        List<Book> books = Arrays.asList(aBook, anotherBook);
+        Biblioteca biblioteca = new Biblioteca(books);
+
+        assertEquals(Optional.empty(), biblioteca.checkoutABook("book3"));
+    }
+
+    @Test
+    void shouldRemoveBookFromAllBooks() {
+        Book aBook = new Book("book1", "author1", 1996);
+        Book anotherBook = new Book("book2", "author2", 1996);
+        List<Book> books = Arrays.asList(aBook, anotherBook);
+        Biblioteca biblioteca = new Biblioteca(books);
+
+        biblioteca.checkoutABook("book1");
+
+        assertEquals(anotherBook.representation(), biblioteca.representationOfAllBook());
     }
 
 }

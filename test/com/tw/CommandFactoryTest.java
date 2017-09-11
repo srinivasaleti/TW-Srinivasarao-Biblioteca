@@ -35,4 +35,10 @@ class CommandFactoryTest {
         assertEquals(InvalidCommand.class, this.commandFactory.getCommand(option).getClass());
     }
 
+    @Test
+    void expectedCheckoutBookCommand() {
+        String option = "2";
+        assertEquals(CheckoutBookCommand.class, this.commandFactory.getCommand(option).getClass());
+    }
+
 }

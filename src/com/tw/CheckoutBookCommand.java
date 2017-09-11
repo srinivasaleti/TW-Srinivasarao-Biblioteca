@@ -1,0 +1,26 @@
+package com.tw;
+
+//Represents a command which is responsible for checkout a book from library
+public class CheckoutBookCommand implements Command {
+
+    private static final String ENTER_BOOK_NAME_TO_CHECKOUT = "Enter book name to checkout::";
+
+    private final Biblioteca biblioteca;
+    private final IO io;
+
+    public CheckoutBookCommand(Biblioteca biblioteca, IO io) {
+        this.biblioteca = biblioteca;
+        this.io = io;
+    }
+
+    @Override
+    public void execute() {
+        this.biblioteca.checkoutABook(readBookName());
+    }
+
+    private String readBookName() {
+        this.io.print(ENTER_BOOK_NAME_TO_CHECKOUT);
+        return this.io.getInput();
+    }
+
+}
