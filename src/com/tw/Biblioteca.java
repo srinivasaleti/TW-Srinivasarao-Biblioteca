@@ -36,4 +36,8 @@ public class Biblioteca {
         return checkedOutBook;
     }
 
+    public boolean isEmpty() {
+        return this.books.isEmpty();
+    }
+
 }

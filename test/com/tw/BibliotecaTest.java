@@ -9,6 +9,8 @@ import java.util.Optional;
 
 import static com.tw.ConsoleIO.LINE_SEPARATOR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 class BibliotecaTest {
@@ -92,6 +94,23 @@ class BibliotecaTest {
         biblioteca.checkoutABook("book1");
 
         assertEquals(anotherBook.representation(), biblioteca.representationOfAllBook());
+    }
+
+    @Test
+    void shouldReturnTrueIfNoBooksInBiblioteca() {
+        Biblioteca biblioteca = new Biblioteca(null);
+
+        assertTrue(biblioteca.isEmpty());
+    }
+
+    @Test
+    void shouldReturnFalseIfBooksAvailableInBiblioteca() {
+        Book aBook = new Book("book1", "author1", 1996);
+        Book anotherBook = new Book("book2", "author2", 1996);
+        List<Book> books = Arrays.asList(aBook, anotherBook);
+        Biblioteca biblioteca = new Biblioteca(books);
+
+        assertFalse(biblioteca.isEmpty());
     }
 
 }
