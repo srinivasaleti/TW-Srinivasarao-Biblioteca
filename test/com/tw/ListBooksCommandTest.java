@@ -20,11 +20,22 @@ class ListBooksCommandTest {
     }
 
     @Test
+    void shouldDisplayNoBooksAvailableIfBibliotecaIsEmpty() {
+        String noBooksAvailable = "No Books Available";
+
+        when(this.biblioteca.isEmpty()).thenReturn(true);
+        this.listBooks.execute();
+
+        verify(this.io).println(noBooksAvailable);
+    }
+
+    @Test
     void displayHeaderAssociatedWithDisplayingAllBooks() {
         String format = "%-35s %-35s %-35s";
         String books = "Books::";
         String header = String.format(format, "Name", "Author", "YearPublished");
 
+        when(this.biblioteca.isEmpty()).thenReturn(false);
         this.listBooks.execute();
 
         assertAll(() -> {
@@ -35,6 +46,7 @@ class ListBooksCommandTest {
 
     @Test
     void askBibliotecaAboutRepresentationOfAllBooksToDisplayAllBooksInIt() {
+        when(this.biblioteca.isEmpty()).thenReturn(false);
         this.listBooks.execute();
 
         verify(biblioteca).representationOfAllBook();
@@ -44,6 +56,7 @@ class ListBooksCommandTest {
     void displayAllBooksInTheBiblioteca() {
         String allBooks = "All book";
 
+        when(this.biblioteca.isEmpty()).thenReturn(false);
         when(this.biblioteca.representationOfAllBook()).thenReturn(allBooks);
         this.listBooks.execute();
 
