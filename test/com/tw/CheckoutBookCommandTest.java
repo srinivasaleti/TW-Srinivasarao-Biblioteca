@@ -56,4 +56,16 @@ class CheckoutBookCommandTest {
         verify(this.io).println(successMessage);
     }
 
+    @Test
+    void shouldDisplayMessageAssociatedWithUnSuccessfulCheckout() {
+        String name = "bookName";
+        String unSuccessMessage = "This book is not available";
+
+        when(this.io.getInput()).thenReturn(name);
+        when(this.biblioteca.checkoutABook(name)).thenReturn(Optional.empty());
+        this.checkoutBookCommand.execute();
+
+        verify(this.io).println(unSuccessMessage);
+    }
+
 }
