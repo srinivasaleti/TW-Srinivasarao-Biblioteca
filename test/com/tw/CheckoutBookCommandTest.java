@@ -43,4 +43,17 @@ class CheckoutBookCommandTest {
         verify(this.biblioteca).checkoutABook(name);
     }
 
+    @Test
+    void shouldDisplayMessageAssociatedWithSuccessfulCheckout() {
+        String name = "book1";
+        String successMessage = "Thank You Enjoy The Book";
+        Book book = new Book("book1", "author1", 1234);
+
+        when(this.io.getInput()).thenReturn(name);
+        when(this.biblioteca.checkoutABook(name)).thenReturn(Optional.of(book));
+        this.checkoutBookCommand.execute();
+
+        verify(this.io).println(successMessage);
+    }
+
 }
