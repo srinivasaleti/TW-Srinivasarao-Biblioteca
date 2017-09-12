@@ -22,6 +22,10 @@ public class ListBooksCommand implements Command {
             this.io.println(NO_BOOKS_AVAILABLE);
             return;
         }
+        this.displayBooks();
+    }
+
+    private void displayBooks() {
         this.io.println(BOOKS);
         this.io.println(HEADER);
         this.io.println(this.biblioteca.representationOfAllBook());
