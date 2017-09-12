@@ -21,28 +21,9 @@ class ReturnBookCommandTest {
     }
 
     @Test
-    void shouldAskBibliotecaAboutBooksWhetherAreAvailableOrNot() {
-        when(this.biblioteca.isEmpty()).thenReturn(true);
-        this.returnBookCommand.execute();
-
-        verify(this.biblioteca).isEmpty();
-    }
-
-    @Test
-    void shouldDisplayNoBooksAvailableMessageWhenThereAreNoBookInBiblioteca() {
-        String noBooksAvailable = "No Books Available";
-
-        when(this.biblioteca.isEmpty()).thenReturn(true);
-        this.returnBookCommand.execute();
-
-        verify(this.io).println(noBooksAvailable);
-    }
-
-    @Test
     void shouldReadBookNameFromUserToReturnABook() {
         String message = "Enter Book Name To Return::";
 
-        when(this.biblioteca.isEmpty()).thenReturn(false);
         this.returnBookCommand.execute();
 
         verify(this.io).print(message);
@@ -53,7 +34,6 @@ class ReturnBookCommandTest {
     void shouldReturnABookToLibrary() {
         String bookName = "BookName";
 
-        when(this.biblioteca.isEmpty()).thenReturn(false);
         when(this.io.getInput()).thenReturn(bookName);
         this.returnBookCommand.execute();
 
@@ -61,19 +41,10 @@ class ReturnBookCommandTest {
     }
 
     @Test
-    void shouldNotReturnBookIfNoBooksInLibrary() {
-        when(this.biblioteca.isEmpty()).thenReturn(true);
-        this.returnBookCommand.execute();
-
-        verify(this.biblioteca, never()).returnBook(anyString());
-    }
-
-    @Test
     void shouldDisplaySuccessMessageOnSuccessfulReturn() {
         String bookName = "returnBook";
         String successMessage = "Thank you for returning the book";
 
-        when(this.biblioteca.isEmpty()).thenReturn(false);
         when(this.io.getInput()).thenReturn(bookName);
         when(this.biblioteca.returnBook(bookName)).thenReturn(true);
         this.returnBookCommand.execute();
@@ -86,13 +57,11 @@ class ReturnBookCommandTest {
         String bookName = "returnBook";
         String unSuccessMessage = "This is not a valid book to return";
 
-        when(this.biblioteca.isEmpty()).thenReturn(false);
         when(this.io.getInput()).thenReturn(bookName);
         when(this.biblioteca.returnBook(bookName)).thenReturn(false);
         this.returnBookCommand.execute();
 
         verify(this.io).println(unSuccessMessage);
     }
-
 
 }

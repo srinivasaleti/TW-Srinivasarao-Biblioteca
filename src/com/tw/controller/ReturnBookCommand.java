@@ -21,14 +21,6 @@ public class ReturnBookCommand implements Command {
 
     @Override
     public void execute() {
-        if (this.biblioteca.isEmpty()) {
-            this.io.println(NO_BOOKS_AVAILABLE);
-            return;
-        }
-        this.returnBook();
-    }
-
-    private void returnBook() {
         boolean isReturn = this.biblioteca.returnBook(readBookName());
         if (isReturn) {
             this.io.println(SUCCESSFUL_RETURN_MESSAGE);
