@@ -13,6 +13,7 @@ public class Menu {
     private static final String LIST_BOOKS = "1->List Books";
     private static final String CHECKOUT_BOOK = "2->Checkout A Book";
     private static final String ENTER_YOUR_OPTION = "Enter your option::";
+    private static final String RETURN_A_BOOK = "3->Return A Book";
     private static final String TYPE_QUIT = "Type quit to Exit application";
     private static final String QUIT = "quit";
 
@@ -37,7 +38,6 @@ public class Menu {
             Command command = this.commandFactory.getCommand(option);
             command.execute();
         } while (!option.equalsIgnoreCase(QUIT));
-
     }
 
     private String readMenuOptionFromUser() {
@@ -46,7 +46,7 @@ public class Menu {
     }
 
     private void displayMenu() {
-        List<String> options = Arrays.asList(LIST_BOOKS, CHECKOUT_BOOK, TYPE_QUIT);
+        List<String> options = Arrays.asList(LIST_BOOKS, CHECKOUT_BOOK, RETURN_A_BOOK, TYPE_QUIT);
         this.displayMenuHeader();
         options.forEach(this.io::println);
         this.io.println(LINE_SEPARATOR);

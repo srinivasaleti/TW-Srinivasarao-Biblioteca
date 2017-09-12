@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.tw.ConsoleIO.LINE_SEPARATOR;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class BibliotecaTest {
@@ -111,6 +109,44 @@ class BibliotecaTest {
         Biblioteca biblioteca = new Biblioteca(books);
 
         assertFalse(biblioteca.isEmpty());
+    }
+
+    @Test
+    void shouldReturnACheckedOutBook() {
+        Book aBook = new Book("book1", "author1", 1996);
+        Book anotherBook = new Book("book2", "author2", 1996);
+        List<Book> books = Arrays.asList(aBook, anotherBook);
+        Biblioteca biblioteca = new Biblioteca(books);
+
+        biblioteca.checkoutABook("book1");
+
+        assertTrue(biblioteca.returnBook("book1"));
+    }
+
+    @Test
+    void shouldNotReturnAUnCheckedOutBook() {
+        Book aBook = new Book("book1", "author1", 1996);
+        Book anotherBook = new Book("book2", "author2", 1996);
+        List<Book> books = Arrays.asList(aBook, anotherBook);
+        Biblioteca biblioteca = new Biblioteca(books);
+
+        biblioteca.checkoutABook("book1");
+
+        assertFalse(biblioteca.returnBook("book2"));
+    }
+
+    @Test
+    void shouldAddBookToBibliotecaAfterReturningABook() {
+        Book aBook = new Book("book1", "author1", 1996);
+        Book anotherBook = new Book("book2", "author2", 1996);
+        List<Book> books = Arrays.asList(aBook, anotherBook);
+        Biblioteca biblioteca = new Biblioteca(books);
+        String actualRepresentation = anotherBook.representation() + LINE_SEPARATOR + aBook.representation();
+
+        biblioteca.checkoutABook("book1");
+        biblioteca.returnBook("book1");
+
+        assertEquals(biblioteca.representationOfAllBook(), actualRepresentation);
     }
 
 }

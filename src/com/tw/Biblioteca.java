@@ -11,6 +11,7 @@ import static com.tw.ConsoleIO.LINE_SEPARATOR;
 public class Biblioteca {
 
     private final List<Book> books;
+    private final List<Book> checkedOutBooks;
 
     public Biblioteca(List<Book> books) {
         if (books == null) {
@@ -18,6 +19,7 @@ public class Biblioteca {
         } else {
             this.books = new ArrayList<>(books);
         }
+        this.checkedOutBooks = new ArrayList<>();
     }
 
     public String representationOfAllBook() {
@@ -27,17 +29,31 @@ public class Biblioteca {
                 .collect(Collectors.joining(LINE_SEPARATOR));
     }
 
+    public boolean isEmpty() {
+        return this.books.isEmpty();
+    }
+
     public Optional<Book> checkoutABook(String bookName) {
-        Optional<Book> checkedOutBook = this.books
-                .stream()
-                .filter(book -> book.hasSameName(bookName))
-                .findFirst();
-        checkedOutBook.ifPresent(aBook -> this.books.removeIf(book -> book.equals(aBook)));
+        Optional<Book> checkedOutBook = this.findBook(this.books, bookName);
+        checkedOutBook.ifPresent(book -> this.moveBook(this.books, this.checkedOutBooks, book));
         return checkedOutBook;
     }
 
-    public boolean isEmpty() {
-        return this.books.isEmpty();
+    public boolean returnBook(String bookName) {
+        Optional<Book> optionalBook = this.findBook(this.checkedOutBooks, bookName);
+        optionalBook.ifPresent(book -> moveBook(this.checkedOutBooks, this.books, book));
+        return optionalBook.isPresent();
+    }
+
+    private void moveBook(List<Book> fromList, List<Book> toList, Book book) {
+        fromList.remove(book);
+        toList.add(book);
+    }
+
+    private Optional<Book> findBook(List<Book> books, String bookName) {
+        return books.stream()
+                .filter(book -> book.hasSameName(bookName))
+                .findFirst();
     }
 
 }
