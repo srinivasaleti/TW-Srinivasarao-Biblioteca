@@ -1,9 +1,11 @@
-package com.tw;
+package com.tw.controller;
+
+import com.tw.view.IO;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.tw.ConsoleIO.LINE_SEPARATOR;
+import static com.tw.view.ConsoleIO.LINE_SEPARATOR;
 
 //Represents menu for biblioteca
 public class Menu {
@@ -20,7 +22,7 @@ public class Menu {
     private final IO io;
     private final CommandFactory commandFactory;
 
-    Menu(CommandFactory commandFactory, IO io) {
+    public Menu(CommandFactory commandFactory, IO io) {
         this.io = io;
         this.commandFactory = commandFactory;
     }

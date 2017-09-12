@@ -1,4 +1,4 @@
-package com.tw;
+package com.tw.model;
 
 import org.junit.jupiter.api.Test;
 

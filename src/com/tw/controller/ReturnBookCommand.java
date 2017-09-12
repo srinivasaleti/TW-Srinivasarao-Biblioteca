@@ -1,4 +1,7 @@
-package com.tw;
+package com.tw.controller;
+
+import com.tw.model.Biblioteca;
+import com.tw.view.IO;
 
 //Responsible for returning a book to biblioteca
 public class ReturnBookCommand implements Command {

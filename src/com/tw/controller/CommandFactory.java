@@ -1,4 +1,7 @@
-package com.tw;
+package com.tw.controller;
+
+import com.tw.model.Biblioteca;
+import com.tw.view.IO;
 
 //Represents a factory which gives proper command based on user input
 public class CommandFactory {

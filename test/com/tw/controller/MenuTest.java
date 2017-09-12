@@ -1,5 +1,6 @@
-package com.tw;
+package com.tw.controller;
 
+import com.tw.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

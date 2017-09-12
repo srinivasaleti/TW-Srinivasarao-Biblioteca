@@ -1,4 +1,4 @@
-package com.tw;
+package com.tw.view;
 
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ public class ConsoleIO implements IO {
     private final PrintStream out;
     private final Scanner scanner;
 
-    ConsoleIO(PrintStream out, Scanner scanner) {
+    public ConsoleIO(PrintStream out, Scanner scanner) {
         this.out = out;
         this.scanner = scanner;
     }

@@ -1,4 +1,7 @@
-package com.tw;
+package com.tw.controller;
+
+import com.tw.model.Biblioteca;
+import com.tw.view.IO;
 
 //Represents list books command for biblioteca
 public class ListBooksCommand implements Command {

@@ -1,5 +1,8 @@
-package com.tw;
+package com.tw.controller;
 
+import com.tw.model.Biblioteca;
+import com.tw.model.Book;
+import com.tw.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,6 @@
-package com.tw;
+package com.tw.controller;
+
+import com.tw.view.IO;
 
 //Represents quit command for biblioteca
 public class QuitCommand implements Command {

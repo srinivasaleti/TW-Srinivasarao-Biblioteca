@@ -1,4 +1,4 @@
-package com.tw;
+package com.tw.model;
 
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static com.tw.ConsoleIO.LINE_SEPARATOR;
+import static com.tw.view.ConsoleIO.LINE_SEPARATOR;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 

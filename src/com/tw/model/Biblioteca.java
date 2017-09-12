@@ -1,11 +1,11 @@
-package com.tw;
+package com.tw.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.tw.ConsoleIO.LINE_SEPARATOR;
+import static com.tw.view.ConsoleIO.LINE_SEPARATOR;
 
 //Represents a library
 public class Biblioteca {
