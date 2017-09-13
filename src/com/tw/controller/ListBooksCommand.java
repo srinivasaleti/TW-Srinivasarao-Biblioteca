@@ -31,7 +31,7 @@ public class ListBooksCommand implements Command {
     private void displayBooks() {
         this.io.println(BOOKS);
         this.io.println(HEADER);
-        this.io.println(this.biblioteca.representationOfAllBook());
+        this.io.println(this.biblioteca.representationOfAllLibraryItems());
     }
 
 }

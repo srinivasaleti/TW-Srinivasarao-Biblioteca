@@ -21,7 +21,7 @@ public class ReturnBookCommand implements Command {
 
     @Override
     public void execute() {
-        boolean isReturn = this.biblioteca.returnBook(readBookName());
+        boolean isReturn = this.biblioteca.returnLibraryItem(readBookName());
         if (isReturn) {
             this.io.println(SUCCESSFUL_RETURN_MESSAGE);
             return;

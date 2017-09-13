@@ -1,7 +1,7 @@
 package com.tw.model;
 
 //Represent a Written or printed work consisting of pages.
-public class Book implements LibraryItem{
+public class Book implements LibraryItem {
 
     private static final String BOOK_REPRESENTATION_FORMAT = "%-35s %-35s %-10d";
 

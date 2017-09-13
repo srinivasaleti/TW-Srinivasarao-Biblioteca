@@ -1,7 +1,7 @@
 package com.tw.controller;
 
 import com.tw.model.Biblioteca;
-import com.tw.model.Book;
+import com.tw.model.LibraryItem;
 import com.tw.view.IO;
 
 import java.util.Optional;
@@ -32,7 +32,7 @@ public class CheckoutBookCommand implements Command {
     }
 
     private void checkout() {
-        Optional<Book> checkoutBook = this.biblioteca.checkoutABook(readBookName());
+        Optional<LibraryItem> checkoutBook = this.biblioteca.checkoutALibraryItem(readBookName());
         if (checkoutBook.isPresent()) {
             this.io.println(SUCCESS_MESSAGE);
             return;

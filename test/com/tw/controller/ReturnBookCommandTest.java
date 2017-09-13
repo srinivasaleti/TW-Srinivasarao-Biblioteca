@@ -37,7 +37,7 @@ class ReturnBookCommandTest {
         when(this.io.getInput()).thenReturn(bookName);
         this.returnBookCommand.execute();
 
-        verify(this.biblioteca).returnBook(bookName);
+        verify(this.biblioteca).returnLibraryItem(bookName);
     }
 
     @Test
@@ -46,7 +46,7 @@ class ReturnBookCommandTest {
         String successMessage = "Thank you for returning the book";
 
         when(this.io.getInput()).thenReturn(bookName);
-        when(this.biblioteca.returnBook(bookName)).thenReturn(true);
+        when(this.biblioteca.returnLibraryItem(bookName)).thenReturn(true);
         this.returnBookCommand.execute();
 
         verify(this.io).println(successMessage);
@@ -58,7 +58,7 @@ class ReturnBookCommandTest {
         String unSuccessMessage = "This is not a valid book to return";
 
         when(this.io.getInput()).thenReturn(bookName);
-        when(this.biblioteca.returnBook(bookName)).thenReturn(false);
+        when(this.biblioteca.returnLibraryItem(bookName)).thenReturn(false);
         this.returnBookCommand.execute();
 
         verify(this.io).println(unSuccessMessage);

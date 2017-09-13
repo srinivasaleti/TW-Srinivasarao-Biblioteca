@@ -51,7 +51,7 @@ class ListBooksCommandTest {
         when(this.biblioteca.isEmpty()).thenReturn(false);
         this.listBooks.execute();
 
-        verify(biblioteca).representationOfAllBook();
+        verify(biblioteca).representationOfAllLibraryItems();
     }
 
     @Test
@@ -59,7 +59,7 @@ class ListBooksCommandTest {
         String allBooks = "All book";
 
         when(this.biblioteca.isEmpty()).thenReturn(false);
-        when(this.biblioteca.representationOfAllBook()).thenReturn(allBooks);
+        when(this.biblioteca.representationOfAllLibraryItems()).thenReturn(allBooks);
         this.listBooks.execute();
 
         verify(this.io).println(allBooks);

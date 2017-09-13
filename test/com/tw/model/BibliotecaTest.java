@@ -14,139 +14,139 @@ import static org.mockito.Mockito.*;
 class BibliotecaTest {
 
     @Test
-    void expectedNothingWhenThereAreNoBooksInLibrary() {
+    void expectedNothingWhenThereAreNoLibraryItemsInLibrary() {
         Biblioteca biblioteca = new Biblioteca(null);
         String nothing = "";
 
-        assertEquals(nothing, biblioteca.representationOfAllBook());
+        assertEquals(nothing, biblioteca.representationOfAllLibraryItems());
     }
 
     @Test
-    void askRepresentationOfBookInTheBibliotecaToDisplayIt() {
-        Book bookInTheLibrary = mock(Book.class);
-        List<Book> books = Collections.singletonList(bookInTheLibrary);
-        Biblioteca biblioteca = new Biblioteca(books);
+    void shouldAskRepresentationOfLibraryItemInTheBibliotecaToGetRepresentationOfAllLibraryItems() {
+        LibraryItem libraryItemInTheLibrary = mock(LibraryItem.class);
+        List<LibraryItem> libraryItems = Collections.singletonList(libraryItemInTheLibrary);
+        Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        biblioteca.representationOfAllBook();
+        biblioteca.representationOfAllLibraryItems();
 
-        verify(bookInTheLibrary).representation();
+        verify(libraryItemInTheLibrary).representation();
     }
 
     @Test
-    void askRepresentationOfEveryBookInBibliotecaToDisplayAllBooks() {
-        Book bookInTheLibrary = mock(Book.class);
-        Book anotherBookInTheLibrary = mock(Book.class);
-        List<Book> books = Arrays.asList(bookInTheLibrary, anotherBookInTheLibrary);
-        Biblioteca biblioteca = new Biblioteca(books);
+    void shouldAskRepresentationOfEveryLibraryItemInBibliotecaToGetRepresentationOfAllLibraryItems() {
+        LibraryItem libraryItem = mock(LibraryItem.class);
+        LibraryItem anotherLibraryItem = mock(LibraryItem.class);
+        List<LibraryItem> libraryItems = Arrays.asList(libraryItem, anotherLibraryItem);
+        Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        biblioteca.representationOfAllBook();
+        biblioteca.representationOfAllLibraryItems();
 
-        verify(bookInTheLibrary).representation();
-        verify(anotherBookInTheLibrary).representation();
+        verify(libraryItem).representation();
+        verify(anotherLibraryItem).representation();
     }
 
     @Test
-    void expectedRepresentationOfAllBooksInBiblioteca() {
-        Book aBook = mock(Book.class);
-        Book anotherBook = mock(Book.class);
-        List<Book> books = Arrays.asList(aBook, anotherBook);
-        Biblioteca biblioteca = new Biblioteca(books);
-        String aBookRepresentation = "Book1";
-        String anotherBookRepresentation = "Book2";
-        String expected = aBookRepresentation + LINE_SEPARATOR + anotherBookRepresentation;
+    void expectedRepresentationOfAllLibraryItemsInBiblioteca() {
+        LibraryItem aLibraryItem = mock(LibraryItem.class);
+        LibraryItem anotherLibraryItem = mock(LibraryItem.class);
+        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
+        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        String aLibraryItemRepresentation = "LibraryItem1";
+        String anotherLibraryItemRepresentation = "LibraryItem2";
+        String expected = aLibraryItemRepresentation + LINE_SEPARATOR + anotherLibraryItemRepresentation;
 
-        when(aBook.representation()).thenReturn(aBookRepresentation);
-        when(anotherBook.representation()).thenReturn(anotherBookRepresentation);
-        biblioteca.representationOfAllBook();
+        when(aLibraryItem.representation()).thenReturn(aLibraryItemRepresentation);
+        when(anotherLibraryItem.representation()).thenReturn(anotherLibraryItemRepresentation);
+        biblioteca.representationOfAllLibraryItems();
 
-        assertEquals(expected, biblioteca.representationOfAllBook());
+        assertEquals(expected, biblioteca.representationOfAllLibraryItems());
     }
 
     @Test
-    void shouldCheckoutABookFromBibliotecaIfItIsAvailable() {
-        Book aBook = new Book("book1", "author1", 1996);
-        Book anotherBook = new Book("book2", "author2", 1996);
-        List<Book> books = Arrays.asList(aBook, anotherBook);
-        Biblioteca biblioteca = new Biblioteca(books);
+    void shouldCheckoutALibraryItemFromBibliotecaIfItIsAvailable() {
+        LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
+        LibraryItem anotherLibraryItem = new Book("book1", "author2", 1996);
+        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
+        Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        assertEquals(Optional.of(aBook), biblioteca.checkoutABook("book1"));
+        assertEquals(Optional.of(aLibraryItem), biblioteca.checkoutALibraryItem("book1"));
     }
 
     @Test
-    void shouldNotCheckoutABookIfItIsNotAvailableInBiblioteca() {
-        Book aBook = new Book("book1", "author1", 1996);
-        Book anotherBook = new Book("book2", "author2", 1996);
-        List<Book> books = Arrays.asList(aBook, anotherBook);
-        Biblioteca biblioteca = new Biblioteca(books);
+    void shouldNotCheckoutALibraryItemIfItIsNotAvailableInBiblioteca() {
+        LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
+        LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
+        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
+        Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        assertEquals(Optional.empty(), biblioteca.checkoutABook("book3"));
+        assertEquals(Optional.empty(), biblioteca.checkoutALibraryItem("book3"));
     }
 
     @Test
-    void shouldRemoveBookFromAllBooks() {
-        Book aBook = new Book("book1", "author1", 1996);
-        Book anotherBook = new Book("book2", "author2", 1996);
-        List<Book> books = Arrays.asList(aBook, anotherBook);
-        Biblioteca biblioteca = new Biblioteca(books);
+    void shouldRemoveLibraryItemFromAllLibraryItems() {
+        LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
+        LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
+        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
+        Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        biblioteca.checkoutABook("book1");
+        biblioteca.checkoutALibraryItem("book1");
 
-        assertEquals(anotherBook.representation(), biblioteca.representationOfAllBook());
+        assertEquals(anotherLibraryItem.representation(), biblioteca.representationOfAllLibraryItems());
     }
 
     @Test
-    void shouldReturnTrueIfNoBooksInBiblioteca() {
+    void shouldReturnTrueIfNoLibraryItemsInBiblioteca() {
         Biblioteca biblioteca = new Biblioteca(null);
 
         assertTrue(biblioteca.isEmpty());
     }
 
     @Test
-    void shouldReturnFalseIfBooksAvailableInBiblioteca() {
-        Book aBook = new Book("book1", "author1", 1996);
-        Book anotherBook = new Book("book2", "author2", 1996);
-        List<Book> books = Arrays.asList(aBook, anotherBook);
-        Biblioteca biblioteca = new Biblioteca(books);
+    void shouldReturnFalseIfLibraryItemsAvailableInBiblioteca() {
+        LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
+        LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
+        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
+        Biblioteca biblioteca = new Biblioteca(libraryItems);
 
         assertFalse(biblioteca.isEmpty());
     }
 
     @Test
-    void shouldReturnACheckedOutBook() {
-        Book aBook = new Book("book1", "author1", 1996);
-        Book anotherBook = new Book("book2", "author2", 1996);
-        List<Book> books = Arrays.asList(aBook, anotherBook);
-        Biblioteca biblioteca = new Biblioteca(books);
+    void shouldReturnACheckedOutLibraryItem() {
+        LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
+        LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
+        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
+        Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        biblioteca.checkoutABook("book1");
+        biblioteca.checkoutALibraryItem("book1");
 
-        assertTrue(biblioteca.returnBook("book1"));
+        assertTrue(biblioteca.returnLibraryItem("book1"));
     }
 
     @Test
-    void shouldNotReturnAUnCheckedOutBook() {
-        Book aBook = new Book("book1", "author1", 1996);
-        Book anotherBook = new Book("book2", "author2", 1996);
-        List<Book> books = Arrays.asList(aBook, anotherBook);
-        Biblioteca biblioteca = new Biblioteca(books);
+    void shouldNotReturnAUnCheckedOutLibraryItem() {
+        LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
+        LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
+        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
+        Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        biblioteca.checkoutABook("book1");
+        biblioteca.checkoutALibraryItem("book1");
 
-        assertFalse(biblioteca.returnBook("book2"));
+        assertFalse(biblioteca.returnLibraryItem("book2"));
     }
 
     @Test
-    void shouldAddBookToBibliotecaAfterReturningABook() {
-        Book aBook = new Book("book1", "author1", 1996);
-        Book anotherBook = new Book("book2", "author2", 1996);
-        List<Book> books = Arrays.asList(aBook, anotherBook);
-        Biblioteca biblioteca = new Biblioteca(books);
-        String actualRepresentation = anotherBook.representation() + LINE_SEPARATOR + aBook.representation();
+    void shouldAddLibraryItemToBibliotecaAfterReturningALibraryItem() {
+        LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
+        LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
+        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
+        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        String actualRepresentation = anotherLibraryItem.representation() + LINE_SEPARATOR + aLibraryItem.representation();
 
-        biblioteca.checkoutABook("book1");
-        biblioteca.returnBook("book1");
+        biblioteca.checkoutALibraryItem("book1");
+        biblioteca.returnLibraryItem("book1");
 
-        assertEquals(biblioteca.representationOfAllBook(), actualRepresentation);
+        assertEquals(biblioteca.representationOfAllLibraryItems(), actualRepresentation);
     }
 
 }
