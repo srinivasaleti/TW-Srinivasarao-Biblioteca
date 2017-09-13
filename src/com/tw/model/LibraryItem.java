@@ -3,8 +3,8 @@ package com.tw.model;
 //Represents an item in biblioteca
 public interface LibraryItem {
 
-    public String stringRepresentation();
+    public String representation();
 
-    public boolean isSameName(String name);
+    public boolean hasSameName(String name);
 
 }
