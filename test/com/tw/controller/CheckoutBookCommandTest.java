@@ -38,7 +38,7 @@ class CheckoutBookCommandTest {
 
         when(this.biblioteca.isEmpty()).thenReturn(false);
         when(this.io.getInput()).thenReturn(name);
-        when(this.biblioteca.checkoutALibraryItem(name)).thenReturn(Optional.empty());
+        when(this.biblioteca.checkoutALibraryItem(Book.class, name)).thenReturn(Optional.empty());
         this.checkoutBookCommand.execute();
 
         verify(this.io).print("Enter book name to checkout::");
@@ -51,10 +51,10 @@ class CheckoutBookCommandTest {
 
         when(this.biblioteca.isEmpty()).thenReturn(false);
         when(this.io.getInput()).thenReturn(name);
-        when(this.biblioteca.checkoutALibraryItem(name)).thenReturn(Optional.empty());
+        when(this.biblioteca.checkoutALibraryItem(Book.class, name)).thenReturn(Optional.empty());
         this.checkoutBookCommand.execute();
 
-        verify(this.biblioteca).checkoutALibraryItem(name);
+        verify(this.biblioteca).checkoutALibraryItem(Book.class, name);
     }
 
     @Test
@@ -65,7 +65,7 @@ class CheckoutBookCommandTest {
 
         when(this.biblioteca.isEmpty()).thenReturn(false);
         when(this.io.getInput()).thenReturn(name);
-        when(this.biblioteca.checkoutALibraryItem(name)).thenReturn(Optional.of(book));
+        when(this.biblioteca.checkoutALibraryItem(Book.class, name)).thenReturn(Optional.of(book));
         this.checkoutBookCommand.execute();
 
         verify(this.io).println(successMessage);
@@ -78,7 +78,7 @@ class CheckoutBookCommandTest {
 
         when(this.biblioteca.isEmpty()).thenReturn(false);
         when(this.io.getInput()).thenReturn(name);
-        when(this.biblioteca.checkoutALibraryItem(name)).thenReturn(Optional.empty());
+        when(this.biblioteca.checkoutALibraryItem(Book.class, name)).thenReturn(Optional.empty());
         this.checkoutBookCommand.execute();
 
         verify(this.io).println(unSuccessMessage);

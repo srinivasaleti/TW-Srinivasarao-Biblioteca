@@ -34,10 +34,11 @@ public class Biblioteca {
         return this.allLibraryItems.isEmpty();
     }
 
-    public Optional<LibraryItem> checkoutALibraryItem(String libraryItemName) {
-        Optional<LibraryItem> checkedOutLibraryItem = this.findLibraryItem(this.allLibraryItems, libraryItemName);
-        checkedOutLibraryItem.ifPresent(libraryItem -> this.moveLibraryItem(this.allLibraryItems, this.checkedOutLibraryItems, libraryItem));
-        return checkedOutLibraryItem;
+    public Optional<LibraryItem> checkoutALibraryItem(Class<? extends LibraryItem> itemType, String libraryItemName) {
+        Optional<LibraryItem> allItemsHavingSameName = this.findLibraryItem(this.allLibraryItems, libraryItemName);
+        Optional<LibraryItem> checkedOutItem = allItemsHavingSameName.filter(libraryItem -> libraryItem.getClass().equals(itemType));
+        checkedOutItem.ifPresent(libraryItem -> this.moveLibraryItem(this.allLibraryItems, this.checkedOutLibraryItems, libraryItem));
+        return checkedOutItem;
     }
 
     public boolean returnLibraryItem(String libraryItemName) {

@@ -51,13 +51,13 @@ class BibliotecaTest {
     }
 
     @Test
-    void shouldCheckoutALibraryItemFromBibliotecaIfItIsAvailable() {
+    void shouldCheckoutALibraryItemIfItAvailableInBiblioteca() {
         LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
         LibraryItem anotherLibraryItem = new Book("book1", "author2", 1996);
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
         Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        assertEquals(Optional.of(aLibraryItem), biblioteca.checkoutALibraryItem("book1"));
+        assertEquals(Optional.of(aLibraryItem), biblioteca.checkoutALibraryItem(Book.class, "book1"));
     }
 
     @Test
@@ -67,7 +67,23 @@ class BibliotecaTest {
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
         Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        assertEquals(Optional.empty(), biblioteca.checkoutALibraryItem("book3"));
+        assertEquals(Optional.empty(), biblioteca.checkoutALibraryItem(Book.class, "book3"));
+    }
+
+    @Test
+    void shouldNotCheckoutAMovieInsteadOfBookEvenIfNameMatches() {
+        String titanic = "titanic";
+        LibraryItem book = new Book(titanic, "author1", 1996);
+        LibraryItem movie = new Movie(titanic, 1996, "author2", "3");
+        List<LibraryItem> libraryItems = Arrays.asList(book, movie);
+        Biblioteca biblioteca = new Biblioteca(libraryItems);
+
+        Optional<LibraryItem> checkoutItem = biblioteca.checkoutALibraryItem(Book.class, "titanic");
+
+        assertAll(() -> {
+            assertNotEquals(Optional.of(movie), checkoutItem);
+            assertEquals(Optional.of(book), checkoutItem);
+        });
     }
 
     @Test
@@ -77,7 +93,7 @@ class BibliotecaTest {
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
         Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        biblioteca.checkoutALibraryItem("book1");
+        biblioteca.checkoutALibraryItem(Book.class, "book1");
 
         assertEquals(anotherLibraryItem.representation(), biblioteca.representationOfAllLibraryItems(Book.class));
     }
@@ -106,7 +122,7 @@ class BibliotecaTest {
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
         Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        biblioteca.checkoutALibraryItem("book1");
+        biblioteca.checkoutALibraryItem(Book.class, "book1");
 
         assertTrue(biblioteca.returnLibraryItem("book1"));
     }
@@ -118,7 +134,7 @@ class BibliotecaTest {
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
         Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        biblioteca.checkoutALibraryItem("book1");
+        biblioteca.checkoutALibraryItem(Book.class, "book1");
 
         assertFalse(biblioteca.returnLibraryItem("book2"));
     }
@@ -131,7 +147,7 @@ class BibliotecaTest {
         Biblioteca biblioteca = new Biblioteca(libraryItems);
         String actualRepresentation = anotherLibraryItem.representation() + LINE_SEPARATOR + aLibraryItem.representation();
 
-        biblioteca.checkoutALibraryItem("book1");
+        biblioteca.checkoutALibraryItem(Book.class, "book1");
         biblioteca.returnLibraryItem("book1");
 
         assertEquals(biblioteca.representationOfAllLibraryItems(Book.class), actualRepresentation);
