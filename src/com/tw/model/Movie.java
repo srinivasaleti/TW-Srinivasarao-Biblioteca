@@ -27,4 +27,23 @@ public class Movie implements LibraryItem {
         return this.name.equalsIgnoreCase(name);
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (this.getClass() != object.getClass()) {
+            return false;
+        }
+        if (this == object) {
+            return true;
+        }
+        Movie that = (Movie) object;
+        boolean sameName = this.name.equalsIgnoreCase(that.name);
+        boolean sameAuthor = this.director.equalsIgnoreCase(that.director);
+        boolean sameRatings = this.rating.equalsIgnoreCase(that.rating);
+        boolean sameReleasedYear = this.yearReleased == that.yearReleased;
+        return sameName && sameAuthor && sameReleasedYear && sameRatings;
+    }
+
 }

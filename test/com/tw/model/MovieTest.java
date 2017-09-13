@@ -56,4 +56,50 @@ class MovieTest {
         assertFalse(aMovie.hasSameName(givenName));
     }
 
+    @Test
+    void shouldReturnFalseIfMovieCompareWithNull() {
+        String name = "Titanic";
+        int yearReleased = 1997;
+        String director = "Cameron";
+        String rating = "9";
+        Movie movie = new Movie(name, yearReleased, director, rating);
+
+        assertFalse(movie.equals(null));
+    }
+
+    @Test
+    void shouldReturnFalseIfMovieCompareWithString() {
+        String name = "Titanic";
+        int yearReleased = 1997;
+        String director = "Cameron";
+        String rating = "9";
+        Movie aMovie = new Movie(name, yearReleased, director, rating);
+        String movie = "movie";
+
+        assertFalse(aMovie.equals(movie));
+    }
+
+    @Test
+    void shouldReturnTrueIfMovieCompareWithItSelf() {
+        String name = "Titanic";
+        int yearReleased = 1997;
+        String director = "Cameron";
+        String rating = "9";
+        Movie aMovie = new Movie(name, yearReleased, director, rating);
+
+        assertTrue(aMovie.equals(aMovie));
+    }
+
+    @Test
+    void shouldReturnTrueIfMovieCompareWithSameMovie() {
+        String name = "Titanic";
+        int yearReleased = 1997;
+        String director = "Cameron";
+        String rating = "9";
+        Movie aMovie = new Movie(name, yearReleased, director, rating);
+        Movie sameMovie = new Movie(name, yearReleased, director, rating);
+
+        assertTrue(aMovie.equals(sameMovie));
+    }
+
 }
