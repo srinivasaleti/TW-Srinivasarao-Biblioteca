@@ -25,7 +25,7 @@ public class CheckoutBookCommand implements Command {
 
     @Override
     public void execute() {
-        if (!this.biblioteca.isEmpty()) {
+        if (!this.biblioteca.isEmpty(Book.class)) {
             this.checkout();
             return;
         }

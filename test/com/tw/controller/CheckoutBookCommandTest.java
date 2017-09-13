@@ -26,7 +26,7 @@ class CheckoutBookCommandTest {
     @Test
     void shouldDisplayNoBooksAvailableIfBibliotecaIsEmpty() {
         String message = "No Books Available";
-        when(this.biblioteca.isEmpty()).thenReturn(true);
+        when(this.biblioteca.isEmpty(Book.class)).thenReturn(true);
         this.checkoutBookCommand.execute();
 
         verify(this.io).println(message);
@@ -36,7 +36,7 @@ class CheckoutBookCommandTest {
     void shouldReadBookNameFromUserToCheckout() {
         String name = "book1";
 
-        when(this.biblioteca.isEmpty()).thenReturn(false);
+        when(this.biblioteca.isEmpty(Book.class)).thenReturn(false);
         when(this.io.getInput()).thenReturn(name);
         when(this.biblioteca.checkoutALibraryItem(Book.class, name)).thenReturn(Optional.empty());
         this.checkoutBookCommand.execute();
@@ -49,7 +49,7 @@ class CheckoutBookCommandTest {
     void shouldAskBibliotecaToCheckoutABook() {
         String name = "book1";
 
-        when(this.biblioteca.isEmpty()).thenReturn(false);
+        when(this.biblioteca.isEmpty(Book.class)).thenReturn(false);
         when(this.io.getInput()).thenReturn(name);
         when(this.biblioteca.checkoutALibraryItem(Book.class, name)).thenReturn(Optional.empty());
         this.checkoutBookCommand.execute();
@@ -63,7 +63,7 @@ class CheckoutBookCommandTest {
         String successMessage = "Thank You Enjoy The Book";
         Book book = new Book("book1", "author1", 1234);
 
-        when(this.biblioteca.isEmpty()).thenReturn(false);
+        when(this.biblioteca.isEmpty(Book.class)).thenReturn(false);
         when(this.io.getInput()).thenReturn(name);
         when(this.biblioteca.checkoutALibraryItem(Book.class, name)).thenReturn(Optional.of(book));
         this.checkoutBookCommand.execute();
@@ -76,7 +76,7 @@ class CheckoutBookCommandTest {
         String name = "bookName";
         String unSuccessMessage = "This book is not available";
 
-        when(this.biblioteca.isEmpty()).thenReturn(false);
+        when(this.biblioteca.isEmpty(Book.class)).thenReturn(false);
         when(this.io.getInput()).thenReturn(name);
         when(this.biblioteca.checkoutALibraryItem(Book.class, name)).thenReturn(Optional.empty());
         this.checkoutBookCommand.execute();

@@ -30,8 +30,8 @@ public class Biblioteca {
                 .collect(Collectors.joining(LINE_SEPARATOR));
     }
 
-    public boolean isEmpty() {
-        return this.allLibraryItems.isEmpty();
+    public boolean isEmpty(Class<? extends LibraryItem> itemType) {
+        return this.allLibraryItems.stream().noneMatch(libraryItem -> libraryItem.getClass().equals(itemType));
     }
 
     public Optional<LibraryItem> checkoutALibraryItem(Class<? extends LibraryItem> itemType, String libraryItemName) {

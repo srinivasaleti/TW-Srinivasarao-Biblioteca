@@ -102,17 +102,27 @@ class BibliotecaTest {
     void shouldReturnTrueIfNoLibraryItemsInBiblioteca() {
         Biblioteca biblioteca = new Biblioteca(null);
 
-        assertTrue(biblioteca.isEmpty());
+        assertTrue(biblioteca.isEmpty(Book.class));
     }
 
     @Test
-    void shouldReturnFalseIfLibraryItemsAvailableInBiblioteca() {
+    void shouldReturnFalseIfBooksAreAvailableInBiblioteca() {
         LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
         LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
         Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        assertFalse(biblioteca.isEmpty());
+        assertFalse(biblioteca.isEmpty(Book.class));
+    }
+
+    @Test
+    void shouldReturnTrueIfNoMoviesAreAvailableInBiblioteca() {
+        LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
+        LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
+        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
+        Biblioteca biblioteca = new Biblioteca(libraryItems);
+
+        assertTrue(biblioteca.isEmpty(Movie.class));
     }
 
     @Test

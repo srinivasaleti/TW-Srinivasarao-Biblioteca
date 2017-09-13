@@ -26,7 +26,7 @@ class ListBooksCommandTest {
     void shouldDisplayNoBooksAvailableIfBibliotecaIsEmpty() {
         String noBooksAvailable = "No Books Available";
 
-        when(this.biblioteca.isEmpty()).thenReturn(true);
+        when(this.biblioteca.isEmpty(Book.class)).thenReturn(true);
         this.listBooks.execute();
 
         verify(this.io).println(noBooksAvailable);
@@ -38,7 +38,7 @@ class ListBooksCommandTest {
         String books = "Books::";
         String header = String.format(format, "Name", "Author", "YearPublished");
 
-        when(this.biblioteca.isEmpty()).thenReturn(false);
+        when(this.biblioteca.isEmpty(Book.class)).thenReturn(false);
         this.listBooks.execute();
 
         assertAll(() -> {
@@ -49,7 +49,7 @@ class ListBooksCommandTest {
 
     @Test
     void askBibliotecaAboutRepresentationOfAllBooksToDisplayAllBooksInIt() {
-        when(this.biblioteca.isEmpty()).thenReturn(false);
+        when(this.biblioteca.isEmpty(Book.class)).thenReturn(false);
         this.listBooks.execute();
 
         verify(biblioteca).representationOfAllLibraryItems(Book.class);
@@ -59,7 +59,7 @@ class ListBooksCommandTest {
     void displayAllBooksInTheBiblioteca() {
         String allBooks = "All book";
 
-        when(this.biblioteca.isEmpty()).thenReturn(false);
+        when(this.biblioteca.isEmpty(Book.class)).thenReturn(false);
         when(this.biblioteca.representationOfAllLibraryItems(Book.class)).thenReturn(allBooks);
         this.listBooks.execute();
 
