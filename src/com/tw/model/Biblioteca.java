@@ -22,9 +22,10 @@ public class Biblioteca {
         this.checkedOutLibraryItems = new ArrayList<>();
     }
 
-    public String representationOfAllLibraryItems() {
+    public String representationOfAllLibraryItems(Class<? extends LibraryItem> itemType) {
         return this.allLibraryItems
                 .stream()
+                .filter(libraryItem -> libraryItem.getClass().equals(itemType))
                 .map(LibraryItem::representation)
                 .collect(Collectors.joining(LINE_SEPARATOR));
     }

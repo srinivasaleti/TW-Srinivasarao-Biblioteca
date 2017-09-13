@@ -1,6 +1,7 @@
 package com.tw.controller;
 
 import com.tw.model.Biblioteca;
+import com.tw.model.Book;
 import com.tw.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,7 +52,7 @@ class ListBooksCommandTest {
         when(this.biblioteca.isEmpty()).thenReturn(false);
         this.listBooks.execute();
 
-        verify(biblioteca).representationOfAllLibraryItems();
+        verify(biblioteca).representationOfAllLibraryItems(Book.class);
     }
 
     @Test
@@ -59,7 +60,7 @@ class ListBooksCommandTest {
         String allBooks = "All book";
 
         when(this.biblioteca.isEmpty()).thenReturn(false);
-        when(this.biblioteca.representationOfAllLibraryItems()).thenReturn(allBooks);
+        when(this.biblioteca.representationOfAllLibraryItems(Book.class)).thenReturn(allBooks);
         this.listBooks.execute();
 
         verify(this.io).println(allBooks);

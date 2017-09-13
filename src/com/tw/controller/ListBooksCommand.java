@@ -1,6 +1,7 @@
 package com.tw.controller;
 
 import com.tw.model.Biblioteca;
+import com.tw.model.Book;
 import com.tw.view.IO;
 
 //Represents list books command for biblioteca
@@ -31,7 +32,7 @@ public class ListBooksCommand implements Command {
     private void displayBooks() {
         this.io.println(BOOKS);
         this.io.println(HEADER);
-        this.io.println(this.biblioteca.representationOfAllLibraryItems());
+        this.io.println(this.biblioteca.representationOfAllLibraryItems(Book.class));
     }
 
 }

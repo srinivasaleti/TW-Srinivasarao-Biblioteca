@@ -3,13 +3,11 @@ package com.tw.model;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import static com.tw.view.ConsoleIO.LINE_SEPARATOR;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class BibliotecaTest {
 
@@ -18,48 +16,38 @@ class BibliotecaTest {
         Biblioteca biblioteca = new Biblioteca(null);
         String nothing = "";
 
-        assertEquals(nothing, biblioteca.representationOfAllLibraryItems());
+        assertEquals(nothing, biblioteca.representationOfAllLibraryItems(Book.class));
     }
 
     @Test
-    void shouldAskRepresentationOfLibraryItemInTheBibliotecaToGetRepresentationOfAllLibraryItems() {
-        LibraryItem libraryItemInTheLibrary = mock(LibraryItem.class);
-        List<LibraryItem> libraryItems = Collections.singletonList(libraryItemInTheLibrary);
+    void shouldReturnOnlyRepresentationOfOnlyBooksInBiblioteca() {
+        Book aBook = new Book("book1", "author1", 1996);
+        Book anotherBook = new Book("book2", "author2", 1996);
+        Movie aMovie = new Movie("Movie1", 1996, "Movie2", "1");
+        List<LibraryItem> libraryItems = Arrays.asList(aBook, anotherBook, aMovie);
         Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        biblioteca.representationOfAllLibraryItems();
+        String expected = aBook.representation() + LINE_SEPARATOR + anotherBook.representation();
 
-        verify(libraryItemInTheLibrary).representation();
+        assertAll(() -> {
+            assertEquals(expected, biblioteca.representationOfAllLibraryItems(Book.class));
+            assertFalse(aBook.representation().contains(aMovie.representation()));
+        });
     }
 
     @Test
-    void shouldAskRepresentationOfEveryLibraryItemInBibliotecaToGetRepresentationOfAllLibraryItems() {
-        LibraryItem libraryItem = mock(LibraryItem.class);
-        LibraryItem anotherLibraryItem = mock(LibraryItem.class);
-        List<LibraryItem> libraryItems = Arrays.asList(libraryItem, anotherLibraryItem);
+    void shouldReturnOnlyRepresentationOfMoviesInLibrary() {
+        Book aBook = new Book("book2", "author2", 1996);
+        Movie aMovie = new Movie("Movie1", 1996, "Movie2", "1");
+        List<LibraryItem> libraryItems = Arrays.asList(aBook, aMovie);
         Biblioteca biblioteca = new Biblioteca(libraryItems);
 
-        biblioteca.representationOfAllLibraryItems();
+        String allMoviesRepresentation = biblioteca.representationOfAllLibraryItems(Movie.class);
 
-        verify(libraryItem).representation();
-        verify(anotherLibraryItem).representation();
-    }
-
-    @Test
-    void expectedRepresentationOfAllLibraryItemsInBiblioteca() {
-        LibraryItem aLibraryItem = mock(LibraryItem.class);
-        LibraryItem anotherLibraryItem = mock(LibraryItem.class);
-        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
-        Biblioteca biblioteca = new Biblioteca(libraryItems);
-        String aLibraryItemRepresentation = "LibraryItem1";
-        String anotherLibraryItemRepresentation = "LibraryItem2";
-        String expected = aLibraryItemRepresentation + LINE_SEPARATOR + anotherLibraryItemRepresentation;
-
-        when(aLibraryItem.representation()).thenReturn(aLibraryItemRepresentation);
-        when(anotherLibraryItem.representation()).thenReturn(anotherLibraryItemRepresentation);
-        biblioteca.representationOfAllLibraryItems();
-
-        assertEquals(expected, biblioteca.representationOfAllLibraryItems());
+        assertAll(() -> {
+            assertEquals(allMoviesRepresentation, aMovie.representation());
+            assertNotEquals(allMoviesRepresentation, aBook.representation());
+        });
     }
 
     @Test
@@ -91,7 +79,7 @@ class BibliotecaTest {
 
         biblioteca.checkoutALibraryItem("book1");
 
-        assertEquals(anotherLibraryItem.representation(), biblioteca.representationOfAllLibraryItems());
+        assertEquals(anotherLibraryItem.representation(), biblioteca.representationOfAllLibraryItems(Book.class));
     }
 
     @Test
@@ -146,7 +134,7 @@ class BibliotecaTest {
         biblioteca.checkoutALibraryItem("book1");
         biblioteca.returnLibraryItem("book1");
 
-        assertEquals(biblioteca.representationOfAllLibraryItems(), actualRepresentation);
+        assertEquals(biblioteca.representationOfAllLibraryItems(Book.class), actualRepresentation);
     }
 
 }
