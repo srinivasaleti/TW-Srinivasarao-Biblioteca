@@ -1,6 +1,7 @@
 package com.tw.controller;
 
 import com.tw.model.Biblioteca;
+import com.tw.model.Book;
 import com.tw.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,7 @@ class ReturnBookCommandTest {
         when(this.io.getInput()).thenReturn(bookName);
         this.returnBookCommand.execute();
 
-        verify(this.biblioteca).returnLibraryItem(bookName);
+        verify(this.biblioteca).returnLibraryItem(Book.class, bookName);
     }
 
     @Test
@@ -46,7 +47,7 @@ class ReturnBookCommandTest {
         String successMessage = "Thank you for returning the book";
 
         when(this.io.getInput()).thenReturn(bookName);
-        when(this.biblioteca.returnLibraryItem(bookName)).thenReturn(true);
+        when(this.biblioteca.returnLibraryItem(Book.class, bookName)).thenReturn(true);
         this.returnBookCommand.execute();
 
         verify(this.io).println(successMessage);
@@ -58,7 +59,7 @@ class ReturnBookCommandTest {
         String unSuccessMessage = "This is not a valid book to return";
 
         when(this.io.getInput()).thenReturn(bookName);
-        when(this.biblioteca.returnLibraryItem(bookName)).thenReturn(false);
+        when(this.biblioteca.returnLibraryItem(Book.class, bookName)).thenReturn(false);
         this.returnBookCommand.execute();
 
         verify(this.io).println(unSuccessMessage);

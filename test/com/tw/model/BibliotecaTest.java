@@ -124,7 +124,7 @@ class BibliotecaTest {
 
         biblioteca.checkoutALibraryItem(Book.class, "book1");
 
-        assertTrue(biblioteca.returnLibraryItem("book1"));
+        assertTrue(biblioteca.returnLibraryItem(Book.class, "book1"));
     }
 
     @Test
@@ -136,7 +136,20 @@ class BibliotecaTest {
 
         biblioteca.checkoutALibraryItem(Book.class, "book1");
 
-        assertFalse(biblioteca.returnLibraryItem("book2"));
+        assertFalse(biblioteca.returnLibraryItem(Book.class, "book2"));
+    }
+
+    @Test
+    void shouldNotReturnAMovieInsteadOfBookEvenIfNameMatches() {
+        String name = "half girlfriend";
+        LibraryItem book = new Book(name, "author1", 1996);
+        LibraryItem movie = new Movie(name, 1996, "director", "3");
+        List<LibraryItem> libraryItems = Arrays.asList(book, movie);
+        Biblioteca biblioteca = new Biblioteca(libraryItems);
+
+        biblioteca.checkoutALibraryItem(Book.class, name);
+
+        assertFalse(biblioteca.returnLibraryItem(Movie.class, name));
     }
 
     @Test
@@ -148,7 +161,7 @@ class BibliotecaTest {
         String actualRepresentation = anotherLibraryItem.representation() + LINE_SEPARATOR + aLibraryItem.representation();
 
         biblioteca.checkoutALibraryItem(Book.class, "book1");
-        biblioteca.returnLibraryItem("book1");
+        biblioteca.returnLibraryItem(Book.class, "book1");
 
         assertEquals(biblioteca.representationOfAllLibraryItems(Book.class), actualRepresentation);
     }
