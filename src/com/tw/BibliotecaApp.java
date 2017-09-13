@@ -27,7 +27,9 @@ public class BibliotecaApp {
         Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
         Book loveStory = new Book("Love Story", "Erich Segal", 1970);
         Book firstLove = new Book("First Love", "Ivan Turgenev", 1860);
-        return Arrays.asList(halfGirlFriend, loveStory, firstLove);
+        Movie twilight = new Movie("Twilight", 2009, "HardWicke", "8");
+        Movie titanic = new Movie("Titanic", 1997, "Cameron", "9");
+        return Arrays.asList(halfGirlFriend, loveStory, firstLove, twilight, titanic);
     }
 
 }
