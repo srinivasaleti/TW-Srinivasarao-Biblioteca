@@ -48,9 +48,9 @@ public class Biblioteca {
         return returnItem.isPresent();
     }
 
-    private void moveLibraryItem(List<LibraryItem> fromList, List<LibraryItem> toList, LibraryItem libraryItem) {
-        fromList.remove(libraryItem);
-        toList.add(libraryItem);
+    private void moveLibraryItem(List<LibraryItem> source, List<LibraryItem> destination, LibraryItem libraryItem) {
+        source.remove(libraryItem);
+        destination.add(libraryItem);
     }
 
     private Optional<LibraryItem> findLibraryItem(List<LibraryItem> libraryItems, String libraryItemName) {

@@ -20,17 +20,17 @@ public class Book implements LibraryItem {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object object) {
+        if (object == null) {
             return false;
         }
-        if (this.getClass() != obj.getClass()) {
+        if (this.getClass() != object.getClass()) {
             return false;
         }
-        if (this == obj) {
+        if (this == object) {
             return true;
         }
-        Book that = (Book) obj;
+        Book that = (Book) object;
         boolean sameName = this.name.equalsIgnoreCase(that.name);
         boolean sameAuthor = this.author.equalsIgnoreCase(that.author);
         boolean samePublishedYear = this.yearPublished == that.yearPublished;
