@@ -45,6 +45,7 @@ class MenuTest {
         verify(this.io).println("1->List Books");
         verify(this.io).println("2->Checkout A Book");
         verify(this.io).println("3->Return A Book");
+        verify(this.io).println("4->List Movies");
         verify(this.io).println("Type quit to Exit application");
     }
 

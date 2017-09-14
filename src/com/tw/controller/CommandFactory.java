@@ -9,6 +9,7 @@ public class CommandFactory {
     private static final String LIST_BOOKS_OPTION = "1";
     private static final String CHECK_OUT_BOOK_OPTION = "2";
     private static final String RETURN_BOOK_OPTION = "3";
+    private static final String LIST_MOVIES_OPTION = "4";
     private static final String QUIT_OPTION = "quit";
 
     private final Biblioteca biblioteca;
@@ -28,6 +29,9 @@ public class CommandFactory {
         }
         if (option.equalsIgnoreCase(RETURN_BOOK_OPTION)) {
             return new ReturnBookCommand(this.biblioteca, this.io);
+        }
+        if (option.equalsIgnoreCase(LIST_MOVIES_OPTION)) {
+            return new ListMoviesCommand(this.biblioteca, this.io);
         }
         if (option.equalsIgnoreCase(QUIT_OPTION)) {
             return new QuitCommand(this.io);

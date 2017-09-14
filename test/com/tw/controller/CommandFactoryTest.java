@@ -49,4 +49,10 @@ class CommandFactoryTest {
         assertEquals(ReturnBookCommand.class, this.commandFactory.getCommand(option).getClass());
     }
 
+    @Test
+    void expectedListMoviesCommand() {
+        String option = "4";
+        assertEquals(ListMoviesCommand.class, this.commandFactory.getCommand(option).getClass());
+    }
+
 }
