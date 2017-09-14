@@ -20,7 +20,7 @@ class BibliotecaTest {
     }
 
     @Test
-    void shouldReturnOnlyRepresentationOfOnlyBooksInBiblioteca() {
+    void shouldReturnOnlyRepresentationOfBooksInBiblioteca() {
         Book aBook = new Book("book1", "author1", 1996);
         Book anotherBook = new Book("book2", "author2", 1996);
         Movie aMovie = new Movie("Movie1", 1996, "Movie2", "1");
@@ -36,7 +36,7 @@ class BibliotecaTest {
     }
 
     @Test
-    void shouldReturnOnlyRepresentationOfMoviesInLibrary() {
+    void shouldReturnOnlyRepresentationOfMoviesInBiblioteca() {
         Book aBook = new Book("book2", "author2", 1996);
         Movie aMovie = new Movie("Movie1", 1996, "Movie2", "1");
         List<LibraryItem> libraryItems = Arrays.asList(aBook, aMovie);
@@ -87,7 +87,7 @@ class BibliotecaTest {
     }
 
     @Test
-    void shouldRemoveLibraryItemFromAllLibraryItems() {
+    void shouldRemoveLibraryItemFromAllLibraryItemsForSuccessfulCheckout() {
         LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
         LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
@@ -158,6 +158,7 @@ class BibliotecaTest {
         Biblioteca biblioteca = new Biblioteca(libraryItems);
 
         biblioteca.checkoutALibraryItem(Book.class, name);
+        biblioteca.checkoutALibraryItem(Movie.class, name);
 
         assertFalse(biblioteca.returnLibraryItem(Movie.class, name));
     }

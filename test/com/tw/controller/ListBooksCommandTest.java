@@ -23,7 +23,7 @@ class ListBooksCommandTest {
     }
 
     @Test
-    void shouldDisplayNoBooksAvailableIfBibliotecaIsEmpty() {
+    void shouldDisplayNoBooksAvailableIfBibliotecaThereAreNoBooksInBiblioteca() {
         String noBooksAvailable = "No Books Available";
 
         when(this.biblioteca.isEmpty(Book.class)).thenReturn(true);
@@ -33,7 +33,7 @@ class ListBooksCommandTest {
     }
 
     @Test
-    void displayHeaderAssociatedWithDisplayingAllBooks() {
+    void shouldDisplayHeader() {
         String format = "%-35s %-35s %-35s";
         String books = "Books::";
         String header = String.format(format, "Name", "Author", "YearPublished");
@@ -48,7 +48,7 @@ class ListBooksCommandTest {
     }
 
     @Test
-    void askBibliotecaAboutRepresentationOfAllBooksToDisplayAllBooksInIt() {
+    void shouldAskBibliotecaAboutRepresentationOfAllBooks() {
         when(this.biblioteca.isEmpty(Book.class)).thenReturn(false);
         this.listBooks.execute();
 
@@ -56,7 +56,7 @@ class ListBooksCommandTest {
     }
 
     @Test
-    void displayAllBooksInTheBiblioteca() {
+    void shouldDisplayAllBooksInTheBiblioteca() {
         String allBooks = "All book";
 
         when(this.biblioteca.isEmpty(Book.class)).thenReturn(false);
