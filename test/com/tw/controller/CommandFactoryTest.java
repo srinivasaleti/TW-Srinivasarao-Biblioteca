@@ -61,4 +61,10 @@ class CommandFactoryTest {
         assertEquals(CheckoutMovieCommand.class, this.commandFactory.getCommand(option).getClass());
     }
 
+    @Test
+    void expectedReturnMovieCommand() {
+        String option = "6";
+        assertEquals(ReturnMovieCommand.class, this.commandFactory.getCommand(option).getClass());
+    }
+
 }
