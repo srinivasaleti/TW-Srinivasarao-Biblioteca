@@ -23,6 +23,7 @@ public class ListMoviesCommand implements Command {
     public void execute() {
         if (this.biblioteca.isEmpty(Movie.class)) {
             this.io.println(NO_MOVIES_AVAILABLE);
+            return;
         }
         this.displayMovies();
     }
