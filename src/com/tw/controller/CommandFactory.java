@@ -11,6 +11,7 @@ public class CommandFactory {
     private static final String RETURN_BOOK_OPTION = "3";
     private static final String LIST_MOVIES_OPTION = "4";
     private static final String QUIT_OPTION = "quit";
+    private static final String CHECKOUT_MOVIE_OPTION = "5";
 
     private final Biblioteca biblioteca;
     private final IO io;
@@ -32,6 +33,9 @@ public class CommandFactory {
         }
         if (option.equalsIgnoreCase(LIST_MOVIES_OPTION)) {
             return new ListMoviesCommand(this.biblioteca, this.io);
+        }
+        if (option.equalsIgnoreCase(CHECKOUT_MOVIE_OPTION)) {
+            return new CheckoutMovieCommand(this.biblioteca, this.io);
         }
         if (option.equalsIgnoreCase(QUIT_OPTION)) {
             return new QuitCommand(this.io);

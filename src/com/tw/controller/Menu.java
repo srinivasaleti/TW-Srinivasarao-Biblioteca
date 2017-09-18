@@ -17,6 +17,7 @@ public class Menu {
     private static final String ENTER_YOUR_OPTION = "Enter your option::";
     private static final String RETURN_A_BOOK = "3->Return A Book";
     private static final String LIST_MOVIES = "4->List Movies";
+    private static final String CHECKOUT_MOVIE = "5->Checkout Movie";
     private static final String TYPE_QUIT = "Type quit to Exit application";
     private static final String QUIT = "quit";
 
@@ -49,7 +50,8 @@ public class Menu {
     }
 
     private void displayMenu() {
-        List<String> options = Arrays.asList(LIST_BOOKS, CHECKOUT_BOOK, RETURN_A_BOOK,LIST_MOVIES, TYPE_QUIT);
+        List<String> options = Arrays.asList(LIST_BOOKS, CHECKOUT_BOOK, RETURN_A_BOOK,
+                LIST_MOVIES, CHECKOUT_MOVIE, TYPE_QUIT);
         this.displayMenuHeader();
         options.forEach(this.io::println);
         this.io.println(LINE_SEPARATOR);
