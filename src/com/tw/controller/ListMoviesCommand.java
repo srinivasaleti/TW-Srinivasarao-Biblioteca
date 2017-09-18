@@ -4,6 +4,7 @@ import com.tw.model.Biblioteca;
 import com.tw.model.Movie;
 import com.tw.view.IO;
 
+//Represents a command which is responsible for list movies available in biblioteca
 public class ListMoviesCommand implements Command {
 
     private static final String NO_MOVIES_AVAILABLE = "No Movies Are Available";

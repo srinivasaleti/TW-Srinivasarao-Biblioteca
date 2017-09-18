@@ -7,6 +7,7 @@ import com.tw.view.IO;
 
 import java.util.Optional;
 
+//Represents a command which is responsible for checkout a movie from biblioteca
 public class CheckoutMovieCommand implements Command {
 
     private static final String NO_MOVIES_AVAILABLE = "No Movies Available";
