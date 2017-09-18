@@ -15,8 +15,8 @@ public class CheckoutMovieCommand implements Command {
     private static final String SUCCESS_MESSAGE = "Thank You Enjoy The Movie";
     private static final String UN_SUCCESS_MESSAGE = "This movie is not available";
 
-    private Biblioteca biblioteca;
-    private IO io;
+    private final Biblioteca biblioteca;
+    private final IO io;
 
     public CheckoutMovieCommand(Biblioteca biblioteca, IO io) {
         this.biblioteca = biblioteca;
