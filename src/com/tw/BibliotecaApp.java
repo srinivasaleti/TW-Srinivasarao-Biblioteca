@@ -1,7 +1,6 @@
 package com.tw;
 
-import com.tw.controller.CommandFactory;
-import com.tw.controller.Menu;
+import com.tw.controller.*;
 import com.tw.model.Biblioteca;
 import com.tw.model.Book;
 import com.tw.model.LibraryItem;
@@ -19,7 +18,7 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         IO consoleIO = new ConsoleIO(System.out, new Scanner(System.in));
         Biblioteca biblioteca = new Biblioteca(listOfLibraryItems());
-        CommandFactory commandFactory = new CommandFactory(biblioteca, consoleIO);
+        CommandFactory commandFactory = new CommandFactory(seedCommands(biblioteca, consoleIO), consoleIO);
         Menu menu = new Menu(commandFactory, consoleIO);
         menu.run();
     }
@@ -31,6 +30,17 @@ public class BibliotecaApp {
         Movie twilight = new Movie("Twilight", 2009, "HardWicke", "8");
         Movie titanic = new Movie("Titanic", 1997, "Cameron", "9");
         return Arrays.asList(halfGirlFriend, loveStory, firstLove, twilight, titanic);
+    }
+
+    private static List<Command> seedCommands(Biblioteca biblioteca, IO io) {
+        ListBooksCommand listBooksCommand = new ListBooksCommand(biblioteca, io);
+        ListMoviesCommand listMoviesCommand = new ListMoviesCommand(biblioteca, io);
+        CheckoutBookCommand checkoutBookCommand = new CheckoutBookCommand(biblioteca, io);
+        CheckoutMovieCommand checkoutMovieCommand = new CheckoutMovieCommand(biblioteca, io);
+        ReturnBookCommand returnBookCommand = new ReturnBookCommand(biblioteca, io);
+        ReturnMovieCommand returnMovieCommand = new ReturnMovieCommand(biblioteca, io);
+
+        return Arrays.asList(listBooksCommand, checkoutBookCommand, returnBookCommand, listMoviesCommand, checkoutMovieCommand, returnMovieCommand);
     }
 
 }

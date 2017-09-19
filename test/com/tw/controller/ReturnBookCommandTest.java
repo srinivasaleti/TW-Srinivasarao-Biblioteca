@@ -6,6 +6,7 @@ import com.tw.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class ReturnBookCommandTest {
@@ -63,6 +64,12 @@ class ReturnBookCommandTest {
         this.returnBookCommand.execute();
 
         verify(this.io).println(unSuccessMessage);
+    }
+
+    @Test
+    void shouldReturnNameOfCommandAsReturnBook() {
+        String expected = "Return Book";
+        assertEquals(expected, this.returnBookCommand.representation());
     }
 
 }

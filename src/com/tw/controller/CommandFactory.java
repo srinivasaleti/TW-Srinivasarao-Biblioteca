@@ -1,50 +1,76 @@
 package com.tw.controller;
 
-import com.tw.model.Biblioteca;
 import com.tw.view.IO;
+
+import java.util.List;
+
+import static com.tw.view.ConsoleIO.LINE_SEPARATOR;
 
 //Represents a factory which gives proper command based on user input
 public class CommandFactory {
 
-    private static final String LIST_BOOKS_OPTION = "1";
-    private static final String CHECK_OUT_BOOK_OPTION = "2";
-    private static final String RETURN_BOOK_OPTION = "3";
-    private static final String LIST_MOVIES_OPTION = "4";
-    private static final String QUIT_OPTION = "quit";
-    private static final String CHECKOUT_MOVIE_OPTION = "5";
-    private static final String RETURN_MOVIE_OPTION = "6";
+    private static final int OFFSET = 1;
+    private static final int STARTING_INDEX_OF_LIST = 0;
+    private static final String QUIT = "quit";
+    private static final String TYPE_QUIT_TO_EXIT = "Type Quit To Exit";
+    private static final String DELIMITER = "->";
 
-    private final Biblioteca biblioteca;
+    private final List<Command> commands;
     private final IO io;
 
-    public CommandFactory(Biblioteca bibliotecaClass, IO io) {
-        this.biblioteca = bibliotecaClass;
+    public CommandFactory(List<Command> commands, IO io) {
+        this.commands = commands;
         this.io = io;
     }
 
     public Command getCommand(String option) {
-        if (option.equalsIgnoreCase(LIST_BOOKS_OPTION)) {
-            return new ListBooksCommand(this.biblioteca, this.io);
+        if (option.equalsIgnoreCase(QUIT)) {
+            return new QuitCommand(io);
         }
-        if (option.equalsIgnoreCase(CHECK_OUT_BOOK_OPTION)) {
-            return new CheckoutBookCommand(this.biblioteca, this.io);
+        if (!isValidOption(option)) {
+            return new InvalidCommand(io);
         }
-        if (option.equalsIgnoreCase(RETURN_BOOK_OPTION)) {
-            return new ReturnBookCommand(this.biblioteca, this.io);
-        }
-        if (option.equalsIgnoreCase(LIST_MOVIES_OPTION)) {
-            return new ListMoviesCommand(this.biblioteca, this.io);
-        }
-        if (option.equalsIgnoreCase(CHECKOUT_MOVIE_OPTION)) {
-            return new CheckoutMovieCommand(this.biblioteca, this.io);
-        }
-        if (option.equalsIgnoreCase(RETURN_MOVIE_OPTION)) {
-            return new ReturnMovieCommand(this.biblioteca, this.io);
-        }
-        if (option.equalsIgnoreCase(QUIT_OPTION)) {
-            return new QuitCommand(this.io);
+        int index = Integer.parseInt(option) - OFFSET;
+        if (indexIsInsideListBounds(index)) {
+            return this.commands.get(index);
         }
         return new InvalidCommand(this.io);
+    }
+
+    public String representationOfMenuBasedOnCommands() {
+        StringBuilder result = new StringBuilder();
+        int index = STARTING_INDEX_OF_LIST + OFFSET;
+        for (Command command : this.commands) {
+            appendACommandRepresentationTo(result, command, index);
+            index += OFFSET;
+        }
+        appendQuitCommandRepresentationTo(result);
+        return result.toString();
+    }
+
+    private boolean indexIsInsideListBounds(int index) {
+        return index >= STARTING_INDEX_OF_LIST && index <= this.commands.size();
+    }
+
+    private boolean isValidOption(String option) {
+        for (Character character : option.toCharArray()) {
+            if (!Character.isDigit(character)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void appendACommandRepresentationTo(StringBuilder result, Command command, int index) {
+        result.append(index);
+        result.append(DELIMITER);
+        result.append(command.representation());
+        result.append(LINE_SEPARATOR);
+    }
+
+    private void appendQuitCommandRepresentationTo(StringBuilder result) {
+        result.append(TYPE_QUIT_TO_EXIT);
+        result.append(LINE_SEPARATOR);
     }
 
 }

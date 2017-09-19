@@ -1,70 +1,152 @@
 package com.tw.controller;
 
 import com.tw.model.Biblioteca;
+import com.tw.view.ConsoleIO;
 import com.tw.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+import static com.tw.view.ConsoleIO.LINE_SEPARATOR;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class CommandFactoryTest {
 
     private CommandFactory commandFactory;
+    private List<Command> commands;
 
     @BeforeEach
     void setUp() {
-        Biblioteca biblioteca = mock(Biblioteca.class);
         IO io = mock(IO.class);
-        this.commandFactory = new CommandFactory(biblioteca, io);
+        this.commands = mock(List.class);
+        this.commandFactory = new CommandFactory(this.commands, io);
     }
 
     @Test
-    void expectedListBooksCommand() {
-        String option = "1";
-        assertEquals(ListBooksCommand.class, this.commandFactory.getCommand(option).getClass());
-    }
-
-    @Test
-    void expectedQuitCommand() {
-        String quit = "quit";
-        assertEquals(QuitCommand.class, this.commandFactory.getCommand(quit).getClass());
-    }
-
-    @Test
-    void expectedInvalidCommand() {
+    void shouldReturnInvalidCommand() {
         String option = "invalid";
         assertEquals(InvalidCommand.class, this.commandFactory.getCommand(option).getClass());
     }
 
     @Test
-    void expectedCheckoutBookCommand() {
-        String option = "2";
-        assertEquals(CheckoutBookCommand.class, this.commandFactory.getCommand(option).getClass());
+    void shouldReturnQuitCommand() {
+        String quit = "quit";
+        assertEquals(QuitCommand.class, this.commandFactory.getCommand(quit).getClass());
     }
 
     @Test
-    void expectedReturnBookCommand() {
-        String option = "3";
-        assertEquals(ReturnBookCommand.class, this.commandFactory.getCommand(option).getClass());
+    void shouldAskSizeOfCommandsIfGivenOptionIsValid() {
+        String option = "1";
+
+        this.commandFactory.getCommand(option);
+
+        verify(this.commands).size();
     }
 
     @Test
-    void expectedListMoviesCommand() {
-        String option = "4";
-        assertEquals(ListMoviesCommand.class, this.commandFactory.getCommand(option).getClass());
+    void shouldAskCommandsToGetCommandBasedOnOptionIfItIsValid() {
+        String option = "1";
+        int optionIndex = 0;
+
+        this.commandFactory.getCommand(option);
+
+        verify(this.commands).get(optionIndex);
     }
 
     @Test
-    void expectedCheckoutMovieCommand() {
-        String option = "5";
-        assertEquals(CheckoutMovieCommand.class, this.commandFactory.getCommand(option).getClass());
+    void shouldReturnInvalidCommandIfValueOfAValidOptionIsLessThanZero() {
+        String option = "7";
+        int noOfCommands = 5;
+
+        when(this.commands.size()).thenReturn(noOfCommands);
+        this.commandFactory.getCommand(option);
+
+        assertEquals(InvalidCommand.class, this.commandFactory.getCommand(option).getClass());
     }
 
     @Test
-    void expectedReturnMovieCommand() {
-        String option = "6";
-        assertEquals(ReturnMovieCommand.class, this.commandFactory.getCommand(option).getClass());
+    void shouldGetAValidCommandIfGivenOptionIsValid() {
+        String option = "1";
+        ListBooksCommand command = new ListBooksCommand(new Biblioteca(null), new ConsoleIO(System.out, new Scanner(System.in)));
+
+        when(this.commands.get(0)).thenReturn(command);
+
+        assertAll(() -> {
+            assertEquals(this.commandFactory.getCommand(option).getClass(), ListBooksCommand.class);
+            assertNotEquals(this.commandFactory.getCommand(option).getClass(), QuitCommand.class);
+            assertNotEquals(this.commandFactory.getCommand(option).getClass(), InvalidCommand.class);
+        });
+    }
+
+    @Test
+    void shouldAskRepresentationOfACommandToGetMenuRepresentation() {
+        Command command = mock(Command.class);
+        IO io = mock(IO.class);
+        List<Command> commands = Collections.singletonList(command);
+        CommandFactory commandFactory = new CommandFactory(commands, io);
+
+        commandFactory.representationOfMenuBasedOnCommands();
+
+        verify(command).representation();
+    }
+
+    @Test
+    void shouldAskRepresentationOfEveryCommandToGetMenuRepresentation() {
+        Command command = mock(Command.class);
+        Command anotherCommand = mock(Command.class);
+        IO io = mock(IO.class);
+        List<Command> commands = Arrays.asList(command, anotherCommand);
+        CommandFactory commandFactory = new CommandFactory(commands, io);
+
+        commandFactory.representationOfMenuBasedOnCommands();
+
+        assertAll(() -> {
+            verify(command).representation();
+            verify(anotherCommand).representation();
+        });
+    }
+
+    @Test
+    void shouldReturnRepresentationOfMenuWithSingleCommand() {
+        Command command = mock(Command.class);
+        IO io = mock(IO.class);
+        List<Command> commands = Collections.singletonList(command);
+        CommandFactory commandFactory = new CommandFactory(commands, io);
+        String representation = "Command";
+        String menu = "1->" + representation +
+                LINE_SEPARATOR + "Type Quit To Exit"
+                + LINE_SEPARATOR;
+
+        when(command.representation()).thenReturn(representation);
+        commandFactory.representationOfMenuBasedOnCommands();
+
+        assertEquals(menu, commandFactory.representationOfMenuBasedOnCommands());
+    }
+
+    @Test
+    void shouldReturnRepresentationOfMenuBasedOnListOfCommands() {
+        Command command = mock(Command.class);
+        Command anotherCommand = mock(Command.class);
+        IO io = mock(IO.class);
+        List<Command> commands = Arrays.asList(command, anotherCommand);
+        CommandFactory commandFactory = new CommandFactory(commands, io);
+        String representationOfCommand = "Command";
+        String representationOfAnotherCommand = "anotherCommand";
+        String menu = "1->" + representationOfCommand
+                + LINE_SEPARATOR + "2->" + representationOfAnotherCommand
+                + LINE_SEPARATOR + "Type Quit To Exit"
+                + LINE_SEPARATOR;
+
+        when(command.representation()).thenReturn(representationOfCommand);
+        when(anotherCommand.representation()).thenReturn(representationOfAnotherCommand);
+        commandFactory.representationOfMenuBasedOnCommands();
+
+        assertEquals(menu, commandFactory.representationOfMenuBasedOnCommands());
     }
 
 }

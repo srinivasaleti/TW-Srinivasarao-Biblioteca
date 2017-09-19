@@ -11,6 +11,7 @@ public class ListMoviesCommand extends ListItemsAction implements Command {
     private static final String FORMAT = "%-35s %-35s %-10s %-10s";
     private static final String MOVIES = "Movies::";
     private static final String HEADER = String.format(FORMAT, "Name", "Director", "Year", "Rating");
+    private static final String REPRESENTATION = "List Movies";
 
     public ListMoviesCommand(Biblioteca biblioteca, IO io) {
         super(biblioteca, io, NO_MOVIES_AVAILABLE, MOVIES, HEADER);
@@ -19,6 +20,11 @@ public class ListMoviesCommand extends ListItemsAction implements Command {
     @Override
     public void execute() {
         super.execute(Movie.class);
+    }
+
+    @Override
+    public String representation() {
+        return REPRESENTATION;
     }
 
 }

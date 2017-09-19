@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class CheckoutBookCommandTest {
@@ -82,6 +83,12 @@ class CheckoutBookCommandTest {
         this.checkoutBookCommand.execute();
 
         verify(this.io).println(unSuccessMessage);
+    }
+
+    @Test
+    void shouldReturnCheckoutBookAsNameOfCommand() {
+        String expected = "Checkout Book";
+        assertEquals(expected, this.checkoutBookCommand.representation());
     }
 
 }

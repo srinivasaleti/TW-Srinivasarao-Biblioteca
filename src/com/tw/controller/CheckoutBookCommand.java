@@ -11,6 +11,7 @@ public class CheckoutBookCommand extends CheckoutItemAction implements Command {
     private static final String SUCCESS_MESSAGE = "Thank You Enjoy The Book";
     private static final String UN_SUCCESS_MESSAGE = "This book is not available";
     private static final String NO_BOOKS_AVAILABLE = "No Books Available";
+    private static final String REPRESENTATION = "Checkout Book";
 
     public CheckoutBookCommand(Biblioteca biblioteca, IO io) {
         super(biblioteca, io, NO_BOOKS_AVAILABLE, ENTER_BOOK_NAME_TO_CHECKOUT, SUCCESS_MESSAGE, UN_SUCCESS_MESSAGE);
@@ -19,6 +20,11 @@ public class CheckoutBookCommand extends CheckoutItemAction implements Command {
     @Override
     public void execute() {
         super.execute(Book.class);
+    }
+
+    @Override
+    public String representation() {
+        return REPRESENTATION;
     }
 
 }

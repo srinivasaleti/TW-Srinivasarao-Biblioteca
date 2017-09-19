@@ -6,6 +6,7 @@ import com.tw.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class ListMoviesCommandTest {
@@ -69,6 +70,11 @@ class ListMoviesCommandTest {
         this.listMoviesCommand.execute();
 
         verify(this.io).println(moviesRepresentation);
+    }
+
+    @Test
+    void shouldReturnsListMoviesAsNameOfCommand() {
+        assertEquals("List Movies", this.listMoviesCommand.representation());
     }
 
 }

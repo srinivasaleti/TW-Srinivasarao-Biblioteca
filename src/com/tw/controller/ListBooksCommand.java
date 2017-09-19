@@ -11,6 +11,7 @@ public class ListBooksCommand extends ListItemsAction implements Command {
     private static final String FORMAT = "%-35s %-35s %-35s";
     private static final String HEADER = String.format(FORMAT, "Name", "Author", "YearPublished");
     private static final String NO_BOOKS_AVAILABLE = "No Books Available";
+    private static final String REPRESENTATION = "List Books";
 
     public ListBooksCommand(Biblioteca biblioteca, IO io) {
         super(biblioteca, io, NO_BOOKS_AVAILABLE, BOOKS, HEADER);
@@ -19,6 +20,11 @@ public class ListBooksCommand extends ListItemsAction implements Command {
     @Override
     public void execute() {
         super.execute(Book.class);
+    }
+
+    @Override
+    public String representation() {
+        return REPRESENTATION;
     }
 
 }

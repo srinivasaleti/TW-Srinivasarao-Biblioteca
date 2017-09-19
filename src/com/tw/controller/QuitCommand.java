@@ -6,6 +6,8 @@ import com.tw.view.IO;
 public class QuitCommand implements Command {
 
     private static final String MESSAGE = "Thank you for your valuable time";
+    private static final String REPRESENTATION = "Quit";
+
     private final IO io;
 
     public QuitCommand(IO io) {
@@ -15,6 +17,11 @@ public class QuitCommand implements Command {
     @Override
     public void execute() {
         this.io.println(MESSAGE);
+    }
+
+    @Override
+    public String representation() {
+        return REPRESENTATION;
     }
 
 }

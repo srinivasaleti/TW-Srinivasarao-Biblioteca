@@ -33,7 +33,7 @@ class MenuTest {
     }
 
     @Test
-    void displayMenu() {
+    void shouldAskCommandFactoryToGetRepresentationOfMenu() {
         String quit = "quit";
         QuitCommand quitCommand = new QuitCommand(this.io);
 
@@ -41,14 +41,23 @@ class MenuTest {
         when(this.commandFactory.getCommand(quit)).thenReturn(quitCommand);
         this.menu.run();
 
-        verify(this.io).println("Menu::");
-        verify(this.io).println("1->List Books");
-        verify(this.io).println("2->Checkout A Book");
-        verify(this.io).println("3->Return A Book");
-        verify(this.io).println("4->List Movies");
-        verify(this.io).println("5->Checkout Movie");
-        verify(this.io).println("6->Return Movie");
-        verify(this.io).println("Type quit to Exit application");
+        verify(this.commandFactory).representationOfMenuBasedOnCommands();
+    }
+
+    @Test
+    void shouldDisplayMenu() {
+        String quit = "quit";
+        String menuRepresentation = "menuRepresentation";
+        String header = "Menu::";
+        QuitCommand quitCommand = new QuitCommand(this.io);
+
+        when(this.io.getInput()).thenReturn(quit);
+        when(this.commandFactory.getCommand(quit)).thenReturn(quitCommand);
+        when(this.commandFactory.representationOfMenuBasedOnCommands()).thenReturn(menuRepresentation);
+        this.menu.run();
+
+        verify(this.io).println(header);
+        verify(this.io).println(menuRepresentation);
     }
 
     @Test
