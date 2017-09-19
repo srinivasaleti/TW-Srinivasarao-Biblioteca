@@ -4,7 +4,7 @@ import com.tw.model.Biblioteca;
 import com.tw.model.LibraryItem;
 import com.tw.view.IO;
 
-public abstract class ListItems {
+public abstract class ListItemsAction {
 
     private final String itemRepresentation;
     private final String header;
@@ -13,7 +13,7 @@ public abstract class ListItems {
     private final Biblioteca biblioteca;
     private final IO io;
 
-    public ListItems(Biblioteca biblioteca, IO io, String noItemsAvailable, String itemRepresentation, String header) {
+    public ListItemsAction(Biblioteca biblioteca, IO io, String noItemsAvailable, String itemRepresentation, String header) {
         this.biblioteca = biblioteca;
         this.io = io;
         this.itemRepresentation = itemRepresentation;

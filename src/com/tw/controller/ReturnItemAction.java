@@ -4,7 +4,7 @@ import com.tw.model.Biblioteca;
 import com.tw.model.LibraryItem;
 import com.tw.view.IO;
 
-public abstract class ReturnItem {
+public abstract class ReturnItemAction {
 
     private final String enterItemName;
     private final String successfulReturnMessage;
@@ -13,7 +13,7 @@ public abstract class ReturnItem {
     private final Biblioteca biblioteca;
     private final IO io;
 
-    public ReturnItem(Biblioteca biblioteca, IO io, String enterItemName, String successfulReturnMessage, String unsuccessfulReturnMessage) {
+    public ReturnItemAction(Biblioteca biblioteca, IO io, String enterItemName, String successfulReturnMessage, String unsuccessfulReturnMessage) {
         this.biblioteca = biblioteca;
         this.io = io;
         this.enterItemName = enterItemName;

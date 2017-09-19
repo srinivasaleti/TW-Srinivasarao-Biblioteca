@@ -6,7 +6,7 @@ import com.tw.view.IO;
 
 import java.util.Optional;
 
-abstract class CheckoutItem {
+abstract class CheckoutItemAction {
 
     private final String noItemsAvailable;
     private final String enterItemNameToCheckout;
@@ -16,8 +16,8 @@ abstract class CheckoutItem {
     private final Biblioteca biblioteca;
     private final IO io;
 
-    public CheckoutItem(Biblioteca biblioteca, IO io, String noItemsAvailable, String enterItemNameToCheckout,
-                        String successfulCheckoutMessage, String unSuccessfulCheckoutMessage) {
+    public CheckoutItemAction(Biblioteca biblioteca, IO io, String noItemsAvailable, String enterItemNameToCheckout,
+                              String successfulCheckoutMessage, String unSuccessfulCheckoutMessage) {
         this.biblioteca = biblioteca;
         this.io = io;
         this.noItemsAvailable = noItemsAvailable;

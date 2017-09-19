@@ -5,7 +5,7 @@ import com.tw.model.Book;
 import com.tw.view.IO;
 
 //Represents list books command for biblioteca
-public class ListBooksCommand extends ListItems implements Command {
+public class ListBooksCommand extends ListItemsAction implements Command {
 
     private static final String BOOKS = "Books::";
     private static final String FORMAT = "%-35s %-35s %-35s";

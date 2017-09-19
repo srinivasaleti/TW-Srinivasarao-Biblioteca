@@ -5,7 +5,7 @@ import com.tw.model.Book;
 import com.tw.view.IO;
 
 //Responsible for returning a book to biblioteca
-public class ReturnBookCommand extends ReturnItem implements Command {
+public class ReturnBookCommand extends ReturnItemAction implements Command {
 
     private static final String SUCCESSFUL_RETURN_MESSAGE = "Thank you for returning the book";
     private static final String UNSUCCESSFUL_RETURN_MESSAGE = "This is not a valid book to return";
