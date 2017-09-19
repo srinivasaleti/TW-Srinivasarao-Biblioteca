@@ -27,10 +27,10 @@ public abstract class ListItemsAction {
             this.io.println(this.noItemsAvailable);
             return;
         }
-        this.displayBooks(itemType);
+        this.displayItems(itemType);
     }
 
-    private void displayBooks(Class<? extends LibraryItem> itemType) {
+    private void displayItems(Class<? extends LibraryItem> itemType) {
         this.io.println(this.itemRepresentation);
         this.io.println(this.header);
         this.io.println(this.biblioteca.representationOfAllLibraryItems(itemType));

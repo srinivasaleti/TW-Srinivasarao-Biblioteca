@@ -32,9 +32,9 @@ abstract class CheckoutItemAction {
             this.io.println(noItemsAvailable);
             return;
         }
-        String bookName = readItemName();
-        Optional<LibraryItem> checkoutBook = this.biblioteca.checkoutALibraryItem(itemType, bookName);
-        displayMessageBasedOn(checkoutBook);
+        String itemName = readItemName();
+        Optional<LibraryItem> checkoutItem = this.biblioteca.checkoutALibraryItem(itemType, itemName);
+        displayMessageBasedOn(checkoutItem);
     }
 
     private String readItemName() {
@@ -42,8 +42,8 @@ abstract class CheckoutItemAction {
         return this.io.getInput();
     }
 
-    private void displayMessageBasedOn(Optional<LibraryItem> checkoutBook) {
-        if (checkoutBook.isPresent()) {
+    private void displayMessageBasedOn(Optional<LibraryItem> checkoutItem) {
+        if (checkoutItem.isPresent()) {
             this.io.println(successfulCheckoutMessage);
             return;
         }
