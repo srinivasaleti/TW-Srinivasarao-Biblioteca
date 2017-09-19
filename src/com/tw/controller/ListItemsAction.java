@@ -4,6 +4,7 @@ import com.tw.model.Biblioteca;
 import com.tw.model.LibraryItem;
 import com.tw.view.IO;
 
+//Responsible for list a specific item from biblioteca
 public abstract class ListItemsAction {
 
     private final String itemRepresentation;

@@ -6,6 +6,7 @@ import com.tw.view.IO;
 
 import java.util.Optional;
 
+//Responsible for checkout a item from biblioteca
 abstract class CheckoutItemAction {
 
     private final String noItemsAvailable;
