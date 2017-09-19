@@ -53,6 +53,7 @@ class CommandFactoryTest {
         String option = "1";
         int optionIndex = 0;
 
+        when(this.commands.size()).thenReturn(1);
         this.commandFactory.getCommand(option);
 
         verify(this.commands).get(optionIndex);
@@ -74,6 +75,7 @@ class CommandFactoryTest {
         String option = "1";
         ListBooksCommand command = new ListBooksCommand(new Biblioteca(null), new ConsoleIO(System.out, new Scanner(System.in)));
 
+        when(this.commands.size()).thenReturn(1);
         when(this.commands.get(0)).thenReturn(command);
 
         assertAll(() -> {
