@@ -49,7 +49,7 @@ public class CommandFactory {
     }
 
     private boolean indexIsInsideListBounds(int index) {
-        return index >= STARTING_INDEX_OF_LIST && index <= this.commands.size();
+        return index >= STARTING_INDEX_OF_LIST && index < this.commands.size();
     }
 
     private boolean isValidOption(String option) {
