@@ -1,10 +1,7 @@
 package com.tw;
 
 import com.tw.controller.*;
-import com.tw.model.Biblioteca;
-import com.tw.model.Book;
-import com.tw.model.LibraryItem;
-import com.tw.model.Movie;
+import com.tw.model.*;
 import com.tw.view.ConsoleIO;
 import com.tw.view.IO;
 
@@ -18,7 +15,7 @@ public class App {
 
     public static void main(String[] args) {
         IO io = new ConsoleIO(System.out, new Scanner(System.in));
-        Biblioteca biblioteca = new Biblioteca(listOfLibraryItems());
+        Biblioteca biblioteca = new Biblioteca(listOfLibraryItems(), seedUsers());
 
         List<Command> commandsForGuestUser = seedCommandsForGuestUser(biblioteca, io);
         List<Command> commandsForLibraryMember = seedCommandsForLibraryMember(biblioteca, io);
@@ -27,7 +24,7 @@ public class App {
         CommandFactory commandFactoryLibraryUser = new CommandFactory(commandsForLibraryMember, io);
 
         Menu menuForLibraryUser = new Menu(commandFactoryLibraryUser, io);
-        LoginCommand loginCommand = new LoginCommand(io, menuForLibraryUser);
+        LoginCommand loginCommand = new LoginCommand(biblioteca, io, menuForLibraryUser);
         Menu menuForGuestUser = new Menu(commandFactoryGuestUser, io);
         LogoutCommand logoutCommand = new LogoutCommand(io, menuForGuestUser);
 
@@ -61,6 +58,13 @@ public class App {
         ListBooksCommand listBooksCommand = new ListBooksCommand(biblioteca, io);
         ListMoviesCommand listMoviesCommand = new ListMoviesCommand(biblioteca, io);
         return new ArrayList<>(Arrays.asList(listBooksCommand, listMoviesCommand));
+    }
+
+    private static List<User> seedUsers() {
+        User user1 = new User("srinu", "123-1234", "Xy2@password", "srinivas.aleti03@gmail.com", "9838918493");
+        User user2 = new User("ramu", "111-1111", "Ab3@password", "srinivas.aleti03@gmail.com", "9838918493");
+
+        return Arrays.asList(user1, user2);
     }
 
 }

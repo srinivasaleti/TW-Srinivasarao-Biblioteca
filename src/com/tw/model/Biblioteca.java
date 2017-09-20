@@ -12,12 +12,18 @@ public class Biblioteca {
 
     private final List<LibraryItem> allLibraryItems;
     private final List<LibraryItem> checkedOutLibraryItems;
+    private final List<User> users;
 
-    public Biblioteca(List<LibraryItem> libraryItems) {
+    public Biblioteca(List<LibraryItem> libraryItems, List<User> users) {
         if (libraryItems == null) {
             this.allLibraryItems = new ArrayList<>();
         } else {
             this.allLibraryItems = new ArrayList<>(libraryItems);
+        }
+        if (users == null) {
+            this.users = new ArrayList<>();
+        } else {
+            this.users = new ArrayList<>(users);
         }
         this.checkedOutLibraryItems = new ArrayList<>();
     }
@@ -59,4 +65,9 @@ public class Biblioteca {
                 .findFirst();
     }
 
+    public Optional<User> userWithGivenCredentials(String libraryNo, String password) {
+        return this.users.stream().filter(user -> user.hasSameCredentials(libraryNo, password)).findFirst();
+    }
+
 }
+

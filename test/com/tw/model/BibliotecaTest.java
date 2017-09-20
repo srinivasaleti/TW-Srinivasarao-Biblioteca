@@ -13,7 +13,7 @@ class BibliotecaTest {
 
     @Test
     void expectedNothingWhenThereAreNoLibraryItemsInLibrary() {
-        Biblioteca biblioteca = new Biblioteca(null);
+        Biblioteca biblioteca = new Biblioteca(null, null);
         String nothing = "";
 
         assertEquals(nothing, biblioteca.representationOfAllLibraryItems(Book.class));
@@ -25,7 +25,7 @@ class BibliotecaTest {
         Book anotherBook = new Book("book2", "author2", 1996);
         Movie aMovie = new Movie("Movie1", 1996, "Movie2", "1");
         List<LibraryItem> libraryItems = Arrays.asList(aBook, anotherBook, aMovie);
-        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
 
         String expected = aBook.representation() + LINE_SEPARATOR + anotherBook.representation();
 
@@ -40,7 +40,7 @@ class BibliotecaTest {
         Book aBook = new Book("book2", "author2", 1996);
         Movie aMovie = new Movie("Movie1", 1996, "Movie2", "1");
         List<LibraryItem> libraryItems = Arrays.asList(aBook, aMovie);
-        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
 
         String allMoviesRepresentation = biblioteca.representationOfAllLibraryItems(Movie.class);
 
@@ -55,7 +55,7 @@ class BibliotecaTest {
         LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
         LibraryItem anotherLibraryItem = new Book("book1", "author2", 1996);
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
-        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
 
         assertEquals(Optional.of(aLibraryItem), biblioteca.checkoutALibraryItem(Book.class, "book1"));
     }
@@ -65,7 +65,7 @@ class BibliotecaTest {
         LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
         LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
-        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
 
         assertEquals(Optional.empty(), biblioteca.checkoutALibraryItem(Book.class, "book3"));
     }
@@ -76,7 +76,7 @@ class BibliotecaTest {
         LibraryItem book = new Book(titanic, "author1", 1996);
         LibraryItem movie = new Movie(titanic, 1996, "author2", "3");
         List<LibraryItem> libraryItems = Arrays.asList(book, movie);
-        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
 
         Optional<LibraryItem> checkoutItem = biblioteca.checkoutALibraryItem(Book.class, "titanic");
 
@@ -91,7 +91,7 @@ class BibliotecaTest {
         LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
         LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
-        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
 
         biblioteca.checkoutALibraryItem(Book.class, "book1");
 
@@ -100,7 +100,7 @@ class BibliotecaTest {
 
     @Test
     void shouldReturnTrueIfNoLibraryItemsInBiblioteca() {
-        Biblioteca biblioteca = new Biblioteca(null);
+        Biblioteca biblioteca = new Biblioteca(null, null);
 
         assertTrue(biblioteca.isEmpty(Book.class));
     }
@@ -110,7 +110,7 @@ class BibliotecaTest {
         LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
         LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
-        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
 
         assertFalse(biblioteca.isEmpty(Book.class));
     }
@@ -120,7 +120,7 @@ class BibliotecaTest {
         LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
         LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
-        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
 
         assertTrue(biblioteca.isEmpty(Movie.class));
     }
@@ -130,7 +130,7 @@ class BibliotecaTest {
         LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
         LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
-        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
 
         biblioteca.checkoutALibraryItem(Book.class, "book1");
 
@@ -142,7 +142,7 @@ class BibliotecaTest {
         LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
         LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
-        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
 
         biblioteca.checkoutALibraryItem(Book.class, "book1");
 
@@ -155,7 +155,7 @@ class BibliotecaTest {
         LibraryItem book = new Book(name, "author1", 1996);
         LibraryItem movie = new Movie(name, 1996, "director", "3");
         List<LibraryItem> libraryItems = Arrays.asList(book, movie);
-        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
 
         biblioteca.checkoutALibraryItem(Book.class, name);
         biblioteca.checkoutALibraryItem(Movie.class, name);
@@ -168,13 +168,33 @@ class BibliotecaTest {
         LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
         LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
         List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
-        Biblioteca biblioteca = new Biblioteca(libraryItems);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
         String actualRepresentation = anotherLibraryItem.representation() + LINE_SEPARATOR + aLibraryItem.representation();
 
         biblioteca.checkoutALibraryItem(Book.class, "book1");
         biblioteca.returnLibraryItem(Book.class, "book1");
 
         assertEquals(biblioteca.representationOfAllLibraryItems(Book.class), actualRepresentation);
+    }
+
+    @Test
+    void shouldReturnValidUserForValidCredentials() {
+        User user1 = new User("srinu", "123-1234", "Xy2@password", "srinivas.aleti03@gmail.com", "9838918493");
+        User user2 = new User("ramu", "111-1111", "Ab3@password", "srinivas.aleti03@gmail.com", "9838918493");
+        List<User> users = Arrays.asList(user1, user2);
+        Biblioteca biblioteca = new Biblioteca(null, users);
+
+        assertTrue(biblioteca.userWithGivenCredentials("111-1111", "Ab3@password").equals(Optional.of(user2)));
+    }
+
+    @Test
+    void shouldNotReturnAnyUserForInvalidCredentials() {
+        User user1 = new User("srinu", "123-1234", "Xy2@password", "srinivas.aleti03@gmail.com", "9838918493");
+        User user2 = new User("ramu", "111-1111", "Ab3@password", "srinivas.aleti03@gmail.com", "9838918493");
+        List<User> users = Arrays.asList(user1, user2);
+        Biblioteca biblioteca = new Biblioteca(null, users);
+
+        assertTrue(biblioteca.userWithGivenCredentials("invalidLibraryNo", "invalidPassword").equals(Optional.empty()));
     }
 
 }

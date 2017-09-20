@@ -79,7 +79,7 @@ class CommandFactoryTest {
     @Test
     void shouldGetAValidCommandIfGivenOptionIsValid() {
         String option = "1";
-        ListBooksCommand command = new ListBooksCommand(new Biblioteca(null), new ConsoleIO(System.out, new Scanner(System.in)));
+        ListBooksCommand command = new ListBooksCommand(new Biblioteca(null, mock(List.class)), new ConsoleIO(System.out, new Scanner(System.in)));
 
         when(this.commands.size()).thenReturn(1);
         when(this.commands.get(0)).thenReturn(command);
@@ -164,7 +164,8 @@ class CommandFactoryTest {
 
     @Test
     void shouldReturnTrueForVerifyingWhetherLoginCommandIsExitCommandOfAMenuOrNot() {
-        assertTrue(this.commandFactory.isExitCommandForMenu(new LoginCommand(mock(IO.class), mock(Menu.class))));
+        assertTrue(this.commandFactory.isExitCommandForMenu(new LoginCommand(mock(Biblioteca.class), mock(IO.class),
+                mock(Menu.class))));
     }
 
     @Test
