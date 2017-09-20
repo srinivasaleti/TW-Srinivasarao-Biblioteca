@@ -48,6 +48,19 @@ public class CommandFactory {
         return result.toString();
     }
 
+    public boolean isExitCommandForMenu(Command command) {
+        if (command instanceof QuitCommand) {
+            return true;
+        }
+        if (command instanceof LoginCommand) {
+            return true;
+        }
+        if (command instanceof LogoutCommand) {
+            return true;
+        }
+        return false;
+    }
+
     private boolean indexIsInsideListBounds(int index) {
         return index >= STARTING_INDEX_OF_LIST && index < this.commands.size();
     }

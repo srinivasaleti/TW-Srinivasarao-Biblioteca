@@ -151,4 +151,34 @@ class CommandFactoryTest {
         assertEquals(menu, commandFactory.representationOfMenuBasedOnCommands());
     }
 
+    @Test
+    void shouldReturnTrueForVerifyingWhetherQuitCommandIsExitCommandOfAMenuOrNot() {
+        assertTrue(this.commandFactory.isExitCommandForMenu(new QuitCommand(mock(IO.class))));
+    }
+
+    @Test
+    void shouldReturnTrueForVerifyingWhetherLoginCommandIsExitCommandOfAMenuOrNot() {
+        assertTrue(this.commandFactory.isExitCommandForMenu(new LoginCommand(mock(IO.class), mock(Menu.class))));
+    }
+
+    @Test
+    void shouldReturnTrueForVerifyingWhetherLogoutCommandIsExistCommandOfMenuOrNot() {
+        assertTrue(this.commandFactory.isExitCommandForMenu(new LogoutCommand(mock(IO.class), mock(Menu.class))));
+    }
+
+    @Test
+    void shouldReturnFotANonExistCommandOfMenu() {
+        Biblioteca biblioteca = mock(Biblioteca.class);
+        IO io = mock(IO.class);
+        assertAll(() -> {
+            assertFalse(this.commandFactory.isExitCommandForMenu(new InvalidCommand(io)));
+            assertFalse(this.commandFactory.isExitCommandForMenu(new ListBooksCommand(biblioteca, io)));
+            assertFalse(this.commandFactory.isExitCommandForMenu(new ListMoviesCommand(biblioteca, io)));
+            assertFalse(this.commandFactory.isExitCommandForMenu(new CheckoutMovieCommand(biblioteca, io)));
+            assertFalse(this.commandFactory.isExitCommandForMenu(new CheckoutBookCommand(biblioteca, io)));
+            assertFalse(this.commandFactory.isExitCommandForMenu(new ReturnMovieCommand(biblioteca, io)));
+            assertFalse(this.commandFactory.isExitCommandForMenu(new ReturnBookCommand(biblioteca, io)));
+        });
+    }
+
 }

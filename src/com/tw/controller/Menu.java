@@ -9,7 +9,6 @@ public class Menu {
 
     private static final String MENU_HEADER = "Menu::";
     private static final String ENTER_YOUR_OPTION = "Enter your option::";
-    private static final String QUIT = "quit";
 
     private final IO io;
     private final CommandFactory commandFactory;
@@ -21,12 +20,13 @@ public class Menu {
 
     public void menuSelection() {
         String option;
+        Command command;
         do {
             this.displayMenu();
             option = this.readMenuOptionFromUser();
-            Command command = this.commandFactory.getCommand(option);
+            command = this.commandFactory.getCommand(option);
             command.execute();
-        } while (!option.equalsIgnoreCase(QUIT));
+        } while (!this.commandFactory.isExitCommandForMenu(command));
     }
 
     private String readMenuOptionFromUser() {
