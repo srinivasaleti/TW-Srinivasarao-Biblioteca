@@ -29,8 +29,9 @@ public class App {
         Menu menuForLibraryUser = new Menu(commandFactoryLibraryUser, io);
         LoginCommand loginCommand = new LoginCommand(io, menuForLibraryUser);
         Menu menuForGuestUser = new Menu(commandFactoryGuestUser, io);
+        LogoutCommand logoutCommand = new LogoutCommand(io, menuForGuestUser);
 
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(io, commandsForGuestUser, loginCommand, menuForGuestUser);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(io, commandsForGuestUser, commandsForLibraryMember, loginCommand, logoutCommand, menuForGuestUser);
         bibliotecaApp.run();
     }
 
@@ -43,7 +44,7 @@ public class App {
         return Arrays.asList(halfGirlFriend, loveStory, firstLove, twilight, titanic);
     }
 
-    private static List<Command> seedCommandsForLibraryMember(Biblioteca biblioteca, IO io) {
+    private static ArrayList<Command> seedCommandsForLibraryMember(Biblioteca biblioteca, IO io) {
         ListBooksCommand listBooksCommand = new ListBooksCommand(biblioteca, io);
         ListMoviesCommand listMoviesCommand = new ListMoviesCommand(biblioteca, io);
         CheckoutBookCommand checkoutBookCommand = new CheckoutBookCommand(biblioteca, io);
@@ -51,7 +52,9 @@ public class App {
         ReturnBookCommand returnBookCommand = new ReturnBookCommand(biblioteca, io);
         ReturnMovieCommand returnMovieCommand = new ReturnMovieCommand(biblioteca, io);
 
-        return Arrays.asList(listBooksCommand, checkoutBookCommand, returnBookCommand, listMoviesCommand, checkoutMovieCommand, returnMovieCommand);
+        List<Command> commands = Arrays.asList(listBooksCommand, checkoutBookCommand,
+                returnBookCommand, listMoviesCommand, checkoutMovieCommand, returnMovieCommand);
+        return new ArrayList<>(commands);
     }
 
     private static ArrayList<Command> seedCommandsForGuestUser(Biblioteca biblioteca, IO io) {
