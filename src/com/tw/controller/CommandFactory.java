@@ -14,7 +14,7 @@ public class CommandFactory {
     private static final String QUIT = "quit";
     private static final String TYPE_QUIT_TO_EXIT = "Type Quit To Exit";
     private static final String DELIMITER = "->";
-    public static final String EMPTY = "";
+    private static final String EMPTY = "";
 
     private final List<Command> commands;
     private final IO io;
