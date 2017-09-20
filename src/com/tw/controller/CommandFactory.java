@@ -14,6 +14,7 @@ public class CommandFactory {
     private static final String QUIT = "quit";
     private static final String TYPE_QUIT_TO_EXIT = "Type Quit To Exit";
     private static final String DELIMITER = "->";
+    public static final String EMPTY = "";
 
     private final List<Command> commands;
     private final IO io;
@@ -24,6 +25,9 @@ public class CommandFactory {
     }
 
     public Command getCommand(String option) {
+        if (option.equalsIgnoreCase(EMPTY)) {
+            return new InvalidCommand(io);
+        }
         if (option.equalsIgnoreCase(QUIT)) {
             return new QuitCommand(io);
         }

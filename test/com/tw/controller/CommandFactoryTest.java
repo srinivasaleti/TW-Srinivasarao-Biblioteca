@@ -34,6 +34,12 @@ class CommandFactoryTest {
     }
 
     @Test
+    void shouldReturnInvalidCommandForEmptyOption() {
+        String emptyOption = "";
+        assertEquals(InvalidCommand.class, this.commandFactory.getCommand(emptyOption).getClass());
+    }
+
+    @Test
     void shouldReturnQuitCommand() {
         String quit = "quit";
         assertEquals(QuitCommand.class, this.commandFactory.getCommand(quit).getClass());
