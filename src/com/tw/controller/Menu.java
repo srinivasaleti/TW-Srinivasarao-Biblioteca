@@ -7,7 +7,6 @@ import static com.tw.view.ConsoleIO.LINE_SEPARATOR;
 //Represents menu for biblioteca
 public class Menu {
 
-    private static final String WELCOME_MESSAGE = "Welcome to Bangalore Public Library";
     private static final String MENU_HEADER = "Menu::";
     private static final String ENTER_YOUR_OPTION = "Enter your option::";
     private static final String QUIT = "quit";
@@ -20,12 +19,7 @@ public class Menu {
         this.commandFactory = commandFactory;
     }
 
-    public void run() {
-        this.displayWelcomeMessage();
-        this.menuSelection();
-    }
-
-    private void menuSelection() {
+    public void menuSelection() {
         String option;
         do {
             this.displayMenu();
@@ -49,10 +43,6 @@ public class Menu {
     private void displayMenuHeader() {
         this.io.print(LINE_SEPARATOR);
         this.io.println(MENU_HEADER);
-    }
-
-    private void displayWelcomeMessage() {
-        this.io.println(WELCOME_MESSAGE);
     }
 
 }

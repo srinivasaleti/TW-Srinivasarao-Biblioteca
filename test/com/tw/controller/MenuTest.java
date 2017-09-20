@@ -20,26 +20,13 @@ class MenuTest {
     }
 
     @Test
-    void displayWelcomeMessage() {
-        String welcomeMessage = "Welcome to Bangalore Public Library";
-        String quit = "quit";
-        QuitCommand quitCommand = new QuitCommand(this.io);
-
-        when(this.io.getInput()).thenReturn(quit);
-        when(this.commandFactory.getCommand(quit)).thenReturn(quitCommand);
-        this.menu.run();
-
-        verify(this.io).println(welcomeMessage);
-    }
-
-    @Test
     void shouldAskCommandFactoryToGetRepresentationOfMenu() {
         String quit = "quit";
         QuitCommand quitCommand = new QuitCommand(this.io);
 
         when(this.io.getInput()).thenReturn(quit);
         when(this.commandFactory.getCommand(quit)).thenReturn(quitCommand);
-        this.menu.run();
+        this.menu.menuSelection();
 
         verify(this.commandFactory).representationOfMenuBasedOnCommands();
     }
@@ -54,7 +41,7 @@ class MenuTest {
         when(this.io.getInput()).thenReturn(quit);
         when(this.commandFactory.getCommand(quit)).thenReturn(quitCommand);
         when(this.commandFactory.representationOfMenuBasedOnCommands()).thenReturn(menuRepresentation);
-        this.menu.run();
+        this.menu.menuSelection();
 
         verify(this.io).println(header);
         verify(this.io).println(menuRepresentation);
@@ -68,7 +55,7 @@ class MenuTest {
 
         when(this.io.getInput()).thenReturn(quit);
         when(this.commandFactory.getCommand(quit)).thenReturn(quitCommand);
-        this.menu.run();
+        this.menu.menuSelection();
 
         verify(this.io).print(enterMenuOption);
         verify(this.io).getInput();
@@ -84,7 +71,7 @@ class MenuTest {
         when(this.io.getInput()).thenReturn(userOption, userOption, quit);
         when(this.commandFactory.getCommand(userOption)).thenReturn(invalidCommand);
         when(this.commandFactory.getCommand(quit)).thenReturn(quitCommand);
-        this.menu.run();
+        this.menu.menuSelection();
 
         verify(this.io, times(3)).getInput();
     }
@@ -95,7 +82,7 @@ class MenuTest {
 
         when(this.io.getInput()).thenReturn(quit);
         when(this.commandFactory.getCommand(quit)).thenReturn(new QuitCommand(this.io));
-        this.menu.run();
+        this.menu.menuSelection();
 
         verify(this.commandFactory).getCommand(quit);
     }
@@ -107,7 +94,7 @@ class MenuTest {
 
         when(this.io.getInput()).thenReturn(quit);
         when(this.commandFactory.getCommand(quit)).thenReturn(command);
-        this.menu.run();
+        this.menu.menuSelection();
 
         verify(command).execute();
     }
