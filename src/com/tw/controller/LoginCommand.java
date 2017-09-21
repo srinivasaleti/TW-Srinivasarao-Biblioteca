@@ -6,6 +6,7 @@ import com.tw.view.IO;
 
 import java.util.Optional;
 
+//Represents a command which is responsible for login
 public class LoginCommand implements Command {
 
     private static final String REPRESENTATION = "Login";

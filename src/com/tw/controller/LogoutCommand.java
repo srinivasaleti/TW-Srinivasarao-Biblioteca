@@ -2,6 +2,7 @@ package com.tw.controller;
 
 import com.tw.view.IO;
 
+//Represents a command which is responsible for logout
 public class LogoutCommand implements Command {
 
     public static final String REPRESENTATION = "Logout";
