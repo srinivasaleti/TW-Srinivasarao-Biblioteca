@@ -17,8 +17,8 @@ abstract class CheckoutItemAction {
     private final Biblioteca biblioteca;
     private final IO io;
 
-    public CheckoutItemAction(Biblioteca biblioteca, IO io, String noItemsAvailable, String enterItemNameToCheckout,
-                              String successfulCheckoutMessage, String unSuccessfulCheckoutMessage) {
+    CheckoutItemAction(Biblioteca biblioteca, IO io, String noItemsAvailable, String enterItemNameToCheckout,
+                       String successfulCheckoutMessage, String unSuccessfulCheckoutMessage) {
         this.biblioteca = biblioteca;
         this.io = io;
         this.noItemsAvailable = noItemsAvailable;

@@ -14,7 +14,7 @@ public abstract class ListItemsAction {
     private final Biblioteca biblioteca;
     private final IO io;
 
-    public ListItemsAction(Biblioteca biblioteca, IO io, String noItemsAvailable, String itemRepresentation, String header) {
+    ListItemsAction(Biblioteca biblioteca, IO io, String noItemsAvailable, String itemRepresentation, String header) {
         this.biblioteca = biblioteca;
         this.io = io;
         this.itemRepresentation = itemRepresentation;

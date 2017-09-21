@@ -10,7 +10,7 @@ public class QuitCommand implements Command {
 
     private final IO io;
 
-    public QuitCommand(IO io) {
+    QuitCommand(IO io) {
         this.io = io;
     }
 

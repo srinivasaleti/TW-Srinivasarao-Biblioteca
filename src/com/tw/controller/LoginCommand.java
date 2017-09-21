@@ -47,7 +47,7 @@ public class LoginCommand implements Command {
         return REPRESENTATION;
     }
 
-    public boolean loginSuccessful() {
+    boolean loginSuccessful() {
         return this.loginSuccessful;
     }
 

@@ -7,8 +7,8 @@ import com.tw.view.IO;
 //Represents a command which is responsible for logout
 public class LogoutCommand implements Command {
 
-    public static final String REPRESENTATION = "Logout";
-    public static final String THANKS_FOR_YOUR_VALUABLE_TIME = "Thanks for your valuable time";
+    private static final String REPRESENTATION = "Logout";
+    private static final String THANKS_FOR_YOUR_VALUABLE_TIME = "Thanks for your valuable time";
 
     private final IO io;
     private final Menu menuForGuestUser;

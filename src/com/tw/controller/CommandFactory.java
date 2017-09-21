@@ -24,7 +24,7 @@ public class CommandFactory {
         this.io = io;
     }
 
-    public Command getCommand(String option) {
+    Command getCommand(String option) {
         if (option.equalsIgnoreCase(EMPTY)) {
             return new InvalidCommand(io);
         }
@@ -41,7 +41,7 @@ public class CommandFactory {
         return new InvalidCommand(this.io);
     }
 
-    public String representationOfMenuBasedOnCommands() {
+    String representationOfMenuBasedOnCommands() {
         StringBuilder result = new StringBuilder();
         int index = STARTING_INDEX_OF_LIST + OFFSET;
         for (Command command : this.commands) {
@@ -52,7 +52,7 @@ public class CommandFactory {
         return result.toString();
     }
 
-    public boolean isExitCommandForMenu(Command command) {
+    boolean isExitCommandForMenu(Command command) {
         if (command instanceof QuitCommand) {
             return true;
         }

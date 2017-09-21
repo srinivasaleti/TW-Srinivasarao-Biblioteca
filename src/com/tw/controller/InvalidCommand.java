@@ -10,7 +10,7 @@ public class InvalidCommand implements Command {
 
     private final IO io;
 
-    public InvalidCommand(IO io) {
+    InvalidCommand(IO io) {
         this.io = io;
     }
 

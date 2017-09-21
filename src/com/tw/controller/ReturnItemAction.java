@@ -7,7 +7,7 @@ import com.tw.view.IO;
 //Responsible for return a item to biblioteca
 public abstract class ReturnItemAction {
 
-    public final String notAValidUserMessage;
+    private final String notAValidUserMessage;
     private final String enterItemName;
     private final String successfulReturnMessage;
     private final String itemNotCheckedOutMessage;
@@ -15,7 +15,7 @@ public abstract class ReturnItemAction {
     private final Biblioteca biblioteca;
     private final IO io;
 
-    public ReturnItemAction(Biblioteca biblioteca, IO io, String enterItemName, String successfulReturnMessage, String itemNotCheckedoutMessage, String notAValidUserMessage) {
+    ReturnItemAction(Biblioteca biblioteca, IO io, String enterItemName, String successfulReturnMessage, String itemNotCheckedoutMessage, String notAValidUserMessage) {
         this.biblioteca = biblioteca;
         this.io = io;
         this.enterItemName = enterItemName;
