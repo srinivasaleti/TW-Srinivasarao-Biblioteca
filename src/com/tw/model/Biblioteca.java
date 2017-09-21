@@ -79,12 +79,6 @@ public class Biblioteca {
         destination.add(libraryItem);
     }
 
-    private Optional<LibraryItem> findLibraryItem(List<LibraryItem> libraryItems, String libraryItemName) {
-        return libraryItems.stream()
-                .filter(libraryItem -> libraryItem.hasSameName(libraryItemName))
-                .findFirst();
-    }
-
     public Optional<User> userWithGivenCredentials(String libraryNo, String password) {
         return this.users.stream().filter(user -> user.hasSameCredentials(libraryNo, password)).findFirst();
     }
@@ -95,6 +89,12 @@ public class Biblioteca {
             return true;
         }
         return changeUserToANonGuestUser(user);
+    }
+
+    private Optional<LibraryItem> findLibraryItem(List<LibraryItem> libraryItems, String libraryItemName) {
+        return libraryItems.stream()
+                .filter(libraryItem -> libraryItem.hasSameName(libraryItemName))
+                .findFirst();
     }
 
     private boolean changeUserToANonGuestUser(User user) {

@@ -47,13 +47,13 @@ public class LoginCommand implements Command {
         return REPRESENTATION;
     }
 
+    public boolean loginSuccessful() {
+        return this.loginSuccessful;
+    }
+
     private String readInputFromUser(String message) {
         this.io.print(message);
         return this.io.getInput();
-    }
-
-    public boolean loginSuccessful() {
-        return this.loginSuccessful;
     }
 
 }
