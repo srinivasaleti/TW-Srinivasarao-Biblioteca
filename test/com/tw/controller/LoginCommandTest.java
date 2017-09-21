@@ -1,6 +1,7 @@
 package com.tw.controller;
 
 import com.tw.model.Biblioteca;
+import com.tw.model.LibraryUser;
 import com.tw.model.User;
 import com.tw.view.IO;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +26,7 @@ class LoginCommandTest {
         this.menuForLibraryUser = mock(Menu.class);
         this.biblioteca = mock(Biblioteca.class);
         this.loginCommand = new LoginCommand(this.biblioteca, this.io, this.menuForLibraryUser);
-        this.user = new User("name", "libraryNo", "password", "email", "phoneNo");
+        this.user = new LibraryUser("name", "libraryNo", "password", "email", "phoneNo");
 
     }
 

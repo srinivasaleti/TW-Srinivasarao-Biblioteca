@@ -26,7 +26,7 @@ public class Biblioteca {
         } else {
             this.users = new ArrayList<>(users);
         }
-        this.currentUser = null;
+        this.currentUser = new GuestUser();
         this.checkedOutLibraryItems = new ArrayList<>();
     }
 

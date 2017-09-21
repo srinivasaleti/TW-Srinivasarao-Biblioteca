@@ -61,8 +61,8 @@ public class App {
     }
 
     private static List<User> seedUsers() {
-        User user1 = new User("srinu", "123-1234", "Xy2@password", "srinivas.aleti03@gmail.com", "9838918493");
-        User user2 = new User("ramu", "111-1111", "Ab3@password", "srinivas.aleti03@gmail.com", "9838918493");
+        User user1 = new LibraryUser("srinu", "123-1234", "Xy2@password", "srinivas.aleti03@gmail.com", "9838918493");
+        User user2 = new LibraryUser("ramu", "111-1111", "Ab3@password", "srinivas.aleti03@gmail.com", "9838918493");
 
         return Arrays.asList(user1, user2);
     }

@@ -6,45 +6,44 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class UserTest {
+public class LibraryUserTest {
 
-    private User user;
+    private LibraryUser libraryUser;
 
     @BeforeEach
     void beforeEach() {
-        this.user = new User("srinu", "123-123424", "1234", "srinivas.aleti03@gmail.com", "9848981244");
+        this.libraryUser = new LibraryUser("srinu", "123-123424", "1234", "srinivas.aleti03@gmail.com", "9848981244");
     }
 
     @Test
     void shouldReturnTrueForValidCredentials() {
-        assertTrue(user.hasSameCredentials("123-123424", "1234"));
+        assertTrue(libraryUser.hasSameCredentials("123-123424", "1234"));
     }
 
     @Test
     void shouldReturnFalseForInValidCredentials() {
-        assertFalse(user.hasSameCredentials("123-123414", "1434"));
+        assertFalse(libraryUser.hasSameCredentials("123-123414", "1434"));
     }
 
     @Test
     void shouldReturnFalseWhenVerifyEqualityBetweenUserAndNull() {
-        assertFalse(this.user.equals(null));
+        assertFalse(this.libraryUser.equals(null));
     }
 
     @Test
     void shouldReturnFalseWhenVerifyEqualityBetweenUserAndString() {
-        assertFalse(this.user.equals("user"));
+        assertFalse(this.libraryUser.equals("libraryUser"));
     }
 
     @Test
     void shouldReturnFalseWhenVerifyEqualityBetweenUserAndStringHimSelf() {
-        assertTrue(this.user.equals(this.user));
+        assertTrue(this.libraryUser.equals(this.libraryUser));
     }
 
     @Test
     void shouldReturnFalseWhenVerifyEqualityBetweenUserAndAnotherSameUser() {
-        User sameUser = new User("srinu", "123-123424", "1234", "srinivas.aleti03@gmail.com", "9848981244");
-        assertTrue(this.user.equals(sameUser));
+        User sameUser = new LibraryUser("srinu", "123-123424", "1234", "srinivas.aleti03@gmail.com", "9848981244");
+        assertTrue(this.libraryUser.equals(sameUser));
     }
 
 }
-
