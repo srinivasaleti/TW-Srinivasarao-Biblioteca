@@ -38,7 +38,7 @@ public class LoginCommand implements Command {
         }
         this.menuForLibraryUser.menuSelection();
         this.loginSuccessful = true;
-        this.biblioteca.setCurrentUser(user.get());
+        this.biblioteca.changeCurrentUser(user.get());
     }
 
     @Override

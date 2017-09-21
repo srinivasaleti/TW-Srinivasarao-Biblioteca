@@ -71,12 +71,16 @@ public class Biblioteca {
         return this.users.stream().filter(user -> user.hasSameCredentials(libraryNo, password)).findFirst();
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public boolean changeCurrentUser(User user) {
+        if (!hasUser(user)) {
+            return false;
+        }
+        this.currentUser = user;
+        return true;
     }
 
-    public User currentUser() {
-        return this.currentUser;
+    private boolean hasUser(User currentUser) {
+        return this.users.stream().anyMatch(user -> user.equals(currentUser));
     }
 
 }

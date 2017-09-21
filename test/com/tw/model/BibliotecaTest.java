@@ -199,25 +199,23 @@ class BibliotecaTest {
     }
 
     @Test
-    void shouldSetCurrentUser() {
+    void shouldChangeCurrentUser() {
         User user = new User("srinu", "123-1234", "Xy2@password", "srinivas.aleti03@gmail.com", "9838918493");
         List<User> users = Collections.singletonList(user);
         Biblioteca biblioteca = new Biblioteca(null, users);
 
-        biblioteca.setCurrentUser(user);
-
-        assertTrue(biblioteca.currentUser().equals(user));
+        assertTrue(biblioteca.changeCurrentUser(user));
     }
 
     @Test
-    void shouldSetAnyOtherUserAsCurrentUser() {
-        User user = new User("ramu", "111-1111", "Ab3@password", "srinivas.aleti03@gmail.com", "9838918493");
-        List<User> users = Collections.singletonList(user);
+    void shouldNotChangeCurrentUserOfBibliotecaIfHeIsNotInUserList() {
+        User existingUser = new User("ramu", "111-1111", "Ab3@password", "srinivas.aleti03@gmail.com", "9838918493");
+        User notExistingUser = new User("srinu", "123-1234", "Xy2@password", "srinivas.aleti03@gmail.com", "9838918493");
+
+        List<User> users = Collections.singletonList(existingUser);
         Biblioteca biblioteca = new Biblioteca(null, users);
 
-        biblioteca.setCurrentUser(user);
-
-        assertTrue(biblioteca.currentUser().equals(user));
+        assertFalse(biblioteca.changeCurrentUser(notExistingUser));
     }
 
 }

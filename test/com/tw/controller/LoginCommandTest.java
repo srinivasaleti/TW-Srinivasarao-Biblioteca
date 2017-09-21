@@ -130,7 +130,7 @@ class LoginCommandTest {
         when(this.biblioteca.userWithGivenCredentials(libraryNo, password)).thenReturn(Optional.of(this.user));
         this.loginCommand.execute();
 
-        verify(this.biblioteca).setCurrentUser(this.user);
+        verify(this.biblioteca).changeCurrentUser(this.user);
     }
 
     @Test
@@ -142,7 +142,7 @@ class LoginCommandTest {
         when(this.biblioteca.userWithGivenCredentials(libraryNo, password)).thenReturn(Optional.empty());
         this.loginCommand.execute();
 
-        verify(this.biblioteca, never()).setCurrentUser(this.user);
+        verify(this.biblioteca, never()).changeCurrentUser(this.user);
     }
 
 }
