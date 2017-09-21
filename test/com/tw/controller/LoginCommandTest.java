@@ -57,18 +57,6 @@ class LoginCommandTest {
     }
 
     @Test
-    void shouldDisplayNewMenuAfterSuccessfulLogin() {
-        String libraryNo = "libraryNo";
-        String password = "password";
-
-        when(this.io.getInput()).thenReturn(libraryNo, password);
-        when(this.biblioteca.userWithGivenCredentials(libraryNo, password)).thenReturn(Optional.of(user));
-        this.loginCommand.execute();
-
-        verify(this.menuForLibraryUser).menuSelection();
-    }
-
-    @Test
     void shouldNotDisplayNewMenuForUnSuccessfulLogin() {
         String libraryNo = "libraryNo";
         String password = "password";
@@ -99,30 +87,6 @@ class LoginCommandTest {
     }
 
     @Test
-    void shouldReturnTrueForSuccessfulLogin() {
-        String libraryNo = "libraryNo";
-        String password = "password";
-
-        when(this.io.getInput()).thenReturn(libraryNo, password);
-        when(this.biblioteca.userWithGivenCredentials(libraryNo, password)).thenReturn(Optional.of(this.user));
-        this.loginCommand.execute();
-
-        assertTrue(this.loginCommand.loginSuccessful());
-    }
-
-    @Test
-    void shouldReturnFalseForUnSuccessfulLogin() {
-        String libraryNo = "libraryNo";
-        String password = "password";
-
-        when(this.io.getInput()).thenReturn(libraryNo, password);
-        when(this.biblioteca.userWithGivenCredentials(libraryNo, password)).thenReturn(Optional.empty());
-        this.loginCommand.execute();
-
-        assertFalse(this.loginCommand.loginSuccessful());
-    }
-
-    @Test
     void shouldChangeCurrentUserOfBibliotecaAfterSuccessfulLogin() {
         String libraryNo = "libraryNo";
         String password = "password";
@@ -144,6 +108,57 @@ class LoginCommandTest {
         this.loginCommand.execute();
 
         verify(this.biblioteca, never()).changeCurrentUser(this.user);
+    }
+
+    @Test
+    void shouldInvokeMenuForLibraryUserAfterSuccessfullyChangingCurrentUserOfBiblioteca() {
+        String libraryNo = "libraryNo";
+        String password = "password";
+
+        when(this.io.getInput()).thenReturn(libraryNo, password);
+        when(this.biblioteca.userWithGivenCredentials(libraryNo, password)).thenReturn(Optional.of(this.user));
+        when(this.biblioteca.changeCurrentUser(this.user)).thenReturn(true);
+        this.loginCommand.execute();
+
+        verify(this.menuForLibraryUser).menuSelection();
+    }
+
+    @Test
+    void shouldNotInvokeMenuForLibraryUserIfBibliotecaUserCannotChange() {
+        String libraryNo = "libraryNo";
+        String password = "password";
+
+        when(this.io.getInput()).thenReturn(libraryNo, password);
+        when(this.biblioteca.userWithGivenCredentials(libraryNo, password)).thenReturn(Optional.of(this.user));
+        when(this.biblioteca.changeCurrentUser(this.user)).thenReturn(false);
+        this.loginCommand.execute();
+
+        verify(this.menuForLibraryUser, never()).menuSelection();
+    }
+
+    @Test
+    void shouldReturnTrueForSuccessfulLogin() {
+        String libraryNo = "libraryNo";
+        String password = "password";
+
+        when(this.io.getInput()).thenReturn(libraryNo, password);
+        when(this.biblioteca.userWithGivenCredentials(libraryNo, password)).thenReturn(Optional.of(this.user));
+        when(this.biblioteca.changeCurrentUser(this.user)).thenReturn(true);
+        this.loginCommand.execute();
+
+        assertTrue(this.loginCommand.loginSuccessful());
+    }
+
+    @Test
+    void shouldReturnFalseForUnSuccessfulLogin() {
+        String libraryNo = "libraryNo";
+        String password = "password";
+
+        when(this.io.getInput()).thenReturn(libraryNo, password);
+        when(this.biblioteca.userWithGivenCredentials(libraryNo, password)).thenReturn(Optional.empty());
+        this.loginCommand.execute();
+
+        assertFalse(this.loginCommand.loginSuccessful());
     }
 
 }

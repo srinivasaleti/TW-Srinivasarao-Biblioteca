@@ -36,9 +36,10 @@ public class LoginCommand implements Command {
             this.io.println(INVALID_CREDENTIALS_MESSAGE);
             return;
         }
-        this.menuForLibraryUser.menuSelection();
-        this.loginSuccessful = true;
-        this.biblioteca.changeCurrentUser(user.get());
+        if (this.biblioteca.changeCurrentUser(user.get())) {
+            this.loginSuccessful = true;
+            this.menuForLibraryUser.menuSelection();
+        }
     }
 
     @Override
