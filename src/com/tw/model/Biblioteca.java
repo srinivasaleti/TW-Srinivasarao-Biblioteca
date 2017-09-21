@@ -13,6 +13,7 @@ public class Biblioteca {
     private final List<LibraryItem> allLibraryItems;
     private final List<LibraryItem> checkedOutLibraryItems;
     private final List<User> users;
+    private User currentUser;
 
     public Biblioteca(List<LibraryItem> libraryItems, List<User> users) {
         if (libraryItems == null) {
@@ -25,6 +26,7 @@ public class Biblioteca {
         } else {
             this.users = new ArrayList<>(users);
         }
+        this.currentUser = null;
         this.checkedOutLibraryItems = new ArrayList<>();
     }
 
@@ -69,5 +71,12 @@ public class Biblioteca {
         return this.users.stream().filter(user -> user.hasSameCredentials(libraryNo, password)).findFirst();
     }
 
-}
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
 
+    public User currentUser() {
+        return this.currentUser;
+    }
+
+}

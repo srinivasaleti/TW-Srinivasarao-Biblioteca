@@ -3,6 +3,7 @@ package com.tw.model;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -195,6 +196,28 @@ class BibliotecaTest {
         Biblioteca biblioteca = new Biblioteca(null, users);
 
         assertTrue(biblioteca.userWithGivenCredentials("invalidLibraryNo", "invalidPassword").equals(Optional.empty()));
+    }
+
+    @Test
+    void shouldSetCurrentUser() {
+        User user = new User("srinu", "123-1234", "Xy2@password", "srinivas.aleti03@gmail.com", "9838918493");
+        List<User> users = Collections.singletonList(user);
+        Biblioteca biblioteca = new Biblioteca(null, users);
+
+        biblioteca.setCurrentUser(user);
+
+        assertTrue(biblioteca.currentUser().equals(user));
+    }
+
+    @Test
+    void shouldSetAnyOtherUserAsCurrentUser() {
+        User user = new User("ramu", "111-1111", "Ab3@password", "srinivas.aleti03@gmail.com", "9838918493");
+        List<User> users = Collections.singletonList(user);
+        Biblioteca biblioteca = new Biblioteca(null, users);
+
+        biblioteca.setCurrentUser(user);
+
+        assertTrue(biblioteca.currentUser().equals(user));
     }
 
 }

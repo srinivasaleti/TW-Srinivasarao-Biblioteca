@@ -121,4 +121,28 @@ class LoginCommandTest {
         assertFalse(this.loginCommand.loginSuccessful());
     }
 
+    @Test
+    void shouldChangeCurrentUserOfBibliotecaAfterSuccessfulLogin() {
+        String libraryNo = "libraryNo";
+        String password = "password";
+
+        when(this.io.getInput()).thenReturn(libraryNo, password);
+        when(this.biblioteca.userWithGivenCredentials(libraryNo, password)).thenReturn(Optional.of(this.user));
+        this.loginCommand.execute();
+
+        verify(this.biblioteca).setCurrentUser(this.user);
+    }
+
+    @Test
+    void shouldNotChangeCurrentUserOfBibliotecaOnUnSuccessfulLogin() {
+        String libraryNo = "libraryNo";
+        String password = "password";
+
+        when(this.io.getInput()).thenReturn(libraryNo, password);
+        when(this.biblioteca.userWithGivenCredentials(libraryNo, password)).thenReturn(Optional.empty());
+        this.loginCommand.execute();
+
+        verify(this.biblioteca, never()).setCurrentUser(this.user);
+    }
+
 }
