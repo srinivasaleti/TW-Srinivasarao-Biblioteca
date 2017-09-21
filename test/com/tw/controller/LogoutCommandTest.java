@@ -7,8 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class LogoutCommandTest {
 
@@ -32,25 +31,36 @@ public class LogoutCommandTest {
     }
 
     @Test
+    void shouldChangeCurrentUserOfBibliotecaToGuestUser() {
+        this.logoutCommand.execute();
+
+        verify(this.biblioteca).changeCurrentUser(new GuestUser());
+    }
+
+    @Test
     void shouldDisplayThankYouMessage() {
         String thankYouMessage = "Thanks for your valuable time";
+
+        when(this.biblioteca.changeCurrentUser(new GuestUser())).thenReturn(true);
         this.logoutCommand.execute();
 
         verify(this.io).println(thankYouMessage);
     }
 
     @Test
-    void shouldInvokeMenuForGuestUser() {
+    void shouldNotInvokeMenuForGuestUserIfCommandCanNotChangeCurrentUserOfLibrary() {
+        when(this.biblioteca.changeCurrentUser(new GuestUser())).thenReturn(false);
         this.logoutCommand.execute();
 
-        verify(this.menuForGuestUser).menuSelection();
+        verify(this.menuForGuestUser, never()).menuSelection();
     }
 
     @Test
-    void shouldChangeCurrentUserOfBibliotecaToGuestUser() {
+    void shouldInvokeMenuForGuestUser() {
+        when(this.biblioteca.changeCurrentUser(new GuestUser())).thenReturn(true);
         this.logoutCommand.execute();
 
-        verify(this.biblioteca).changeCurrentUser(new GuestUser());
+        verify(this.menuForGuestUser).menuSelection();
     }
 
 }

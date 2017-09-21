@@ -22,9 +22,10 @@ public class LogoutCommand implements Command {
 
     @Override
     public void execute() {
-        this.io.println(THANKS_FOR_YOUR_VALUABLE_TIME);
-        this.menuForGuestUser.menuSelection();
-        this.biblioteca.changeCurrentUser(new GuestUser());
+        if (this.biblioteca.changeCurrentUser(new GuestUser())) {
+            this.io.println(THANKS_FOR_YOUR_VALUABLE_TIME);
+            this.menuForGuestUser.menuSelection();
+        }
     }
 
     @Override
