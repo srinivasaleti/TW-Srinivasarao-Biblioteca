@@ -100,6 +100,39 @@ class BibliotecaTest {
     }
 
     @Test
+    void shouldReturnTrueIfCurrentUserCheckoutLibraryItem() {
+        LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
+        LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
+        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
+        User user1 = new LibraryUser("srinu", "123-1234", "Xy2@password", "srinivas.aleti03@gmail.com", "9838918493");
+        User user2 = new LibraryUser("ramu", "111-1111", "Ab3@password", "srinivas.aleti03@gmail.com", "9838918493");
+        List<User> users = Arrays.asList(user1, user2);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, users);
+
+        biblioteca.changeCurrentUser(user1);
+        biblioteca.checkoutALibraryItem(Book.class, "book1");
+
+        assertTrue(biblioteca.currentUserCheckedOutItem(Book.class, "book1"));
+    }
+
+    @Test
+    void shouldReturnFalseIfCurrentUserNotCheckedOutLibraryItem() {
+        LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
+        LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
+        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
+        User user1 = new LibraryUser("srinu", "123-1234", "Xy2@password", "srinivas.aleti03@gmail.com", "9838918493");
+        User user2 = new LibraryUser("ramu", "111-1111", "Ab3@password", "srinivas.aleti03@gmail.com", "9838918493");
+        List<User> users = Arrays.asList(user1, user2);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, users);
+
+        biblioteca.changeCurrentUser(user1);
+        biblioteca.checkoutALibraryItem(Book.class, "book1");
+        biblioteca.changeCurrentUser(user2);
+
+        assertFalse(biblioteca.currentUserCheckedOutItem(Book.class, "book1"));
+    }
+
+    @Test
     void shouldReturnTrueIfNoLibraryItemsInBiblioteca() {
         Biblioteca biblioteca = new Biblioteca(null, null);
 
@@ -136,6 +169,30 @@ class BibliotecaTest {
         biblioteca.checkoutALibraryItem(Book.class, "book1");
 
         assertTrue(biblioteca.returnLibraryItem(Book.class, "book1"));
+    }
+
+    @Test
+    void shouldReturnTrueIfAnItemIsCheckedOut() {
+        LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
+        LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
+        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
+
+        biblioteca.checkoutALibraryItem(Book.class, "book1");
+
+        assertTrue(biblioteca.isItemCheckedOut(Book.class, "book1"));
+    }
+
+    @Test
+    void shouldReturnFalseIfAnItemIsNotCheckedOut() {
+        LibraryItem aLibraryItem = new Book("book1", "author1", 1996);
+        LibraryItem anotherLibraryItem = new Book("book2", "author2", 1996);
+        List<LibraryItem> libraryItems = Arrays.asList(aLibraryItem, anotherLibraryItem);
+        Biblioteca biblioteca = new Biblioteca(libraryItems, null);
+
+        biblioteca.checkoutALibraryItem(Book.class, "book1");
+
+        assertFalse(biblioteca.isItemCheckedOut(Book.class, "book2"));
     }
 
     @Test

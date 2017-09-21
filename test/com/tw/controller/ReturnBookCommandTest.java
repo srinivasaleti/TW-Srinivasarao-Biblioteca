@@ -33,10 +33,80 @@ class ReturnBookCommandTest {
     }
 
     @Test
+    void shouldAskBibliotecaToVerifyGivenBookIsCheckoutOrNot() {
+        String bookName = "BookName";
+
+        when(this.io.getInput()).thenReturn(bookName);
+        this.returnBookCommand.execute();
+
+        verify(this.biblioteca).isItemCheckedOut(Book.class, bookName);
+    }
+
+    @Test
+    void shouldNotReturnBookItIsNotYetCheckedOut() {
+        String bookName = "BookName";
+
+        when(this.io.getInput()).thenReturn(bookName);
+        when(this.biblioteca.isItemCheckedOut(Book.class, bookName)).thenReturn(false);
+        this.returnBookCommand.execute();
+
+        verify(this.biblioteca, never()).returnLibraryItem(Book.class, bookName);
+    }
+
+    @Test
+    void shouldDisplayBookNotCheckedOutMessageIfBookIsNotYetCheckedOut() {
+        String bookName = "BookName";
+
+        when(this.io.getInput()).thenReturn(bookName);
+        when(this.biblioteca.isItemCheckedOut(Book.class, bookName)).thenReturn(false);
+        this.returnBookCommand.execute();
+
+        verify(this.io).println("This book is not yet checked out");
+    }
+
+    @Test
+    void shouldAskBibliotecaToVerifyCurrentUserCheckedOutBookOrNot() {
+        String bookName = "BookName";
+
+        when(this.io.getInput()).thenReturn(bookName);
+        when(this.biblioteca.isItemCheckedOut(Book.class, bookName)).thenReturn(true);
+        when(this.biblioteca.currentUserCheckedOutItem(Book.class, bookName)).thenReturn(false);
+        this.returnBookCommand.execute();
+
+        verify(this.biblioteca).currentUserCheckedOutItem(Book.class, bookName);
+    }
+
+    @Test
+    void shouldNotReturnBookIfCurrentUserNotCheckedOutBook() {
+        String bookName = "BookName";
+
+        when(this.io.getInput()).thenReturn(bookName);
+        when(this.biblioteca.isItemCheckedOut(Book.class, bookName)).thenReturn(true);
+        when(this.biblioteca.currentUserCheckedOutItem(Book.class, bookName)).thenReturn(false);
+        this.returnBookCommand.execute();
+
+        verify(this.biblioteca, never()).returnLibraryItem(Book.class, bookName);
+    }
+
+    @Test
+    void shouldDisplayNotValidUserMessageIfCurrentUserNotCheckedOutBook() {
+        String bookName = "BookName";
+
+        when(this.io.getInput()).thenReturn(bookName);
+        when(this.biblioteca.isItemCheckedOut(Book.class, bookName)).thenReturn(true);
+        when(this.biblioteca.currentUserCheckedOutItem(Book.class, bookName)).thenReturn(false);
+        this.returnBookCommand.execute();
+
+        verify(this.io).println("You are not a valid user to return this book");
+    }
+
+    @Test
     void shouldReturnABookToLibrary() {
         String bookName = "BookName";
 
         when(this.io.getInput()).thenReturn(bookName);
+        when(this.biblioteca.isItemCheckedOut(Book.class, bookName)).thenReturn(true);
+        when(this.biblioteca.currentUserCheckedOutItem(Book.class, bookName)).thenReturn(true);
         this.returnBookCommand.execute();
 
         verify(this.biblioteca).returnLibraryItem(Book.class, bookName);
@@ -48,22 +118,12 @@ class ReturnBookCommandTest {
         String successMessage = "Thank you for returning the book";
 
         when(this.io.getInput()).thenReturn(bookName);
+        when(this.biblioteca.isItemCheckedOut(Book.class, bookName)).thenReturn(true);
+        when(this.biblioteca.currentUserCheckedOutItem(Book.class, bookName)).thenReturn(true);
         when(this.biblioteca.returnLibraryItem(Book.class, bookName)).thenReturn(true);
         this.returnBookCommand.execute();
 
         verify(this.io).println(successMessage);
-    }
-
-    @Test
-    void shouldDisplayUnSuccessMessageOnUnSuccessfulReturn() {
-        String bookName = "returnBook";
-        String unSuccessMessage = "This is not a valid book to return";
-
-        when(this.io.getInput()).thenReturn(bookName);
-        when(this.biblioteca.returnLibraryItem(Book.class, bookName)).thenReturn(false);
-        this.returnBookCommand.execute();
-
-        verify(this.io).println(unSuccessMessage);
     }
 
     @Test

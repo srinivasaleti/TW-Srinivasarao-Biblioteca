@@ -1,6 +1,7 @@
 package com.tw.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ public class Biblioteca {
     private final List<LibraryItem> checkedOutLibraryItems;
     private final List<User> users;
     private User currentUser;
+    private final HashMap<LibraryItem, User> register;
 
     public Biblioteca(List<LibraryItem> libraryItems, List<User> users) {
         if (libraryItems == null) {
@@ -28,6 +30,7 @@ public class Biblioteca {
         }
         this.currentUser = new GuestUser();
         this.checkedOutLibraryItems = new ArrayList<>();
+        this.register = new HashMap<>();
     }
 
     public String representationOfAllLibraryItems(Class<? extends LibraryItem> itemType) {
@@ -46,6 +49,7 @@ public class Biblioteca {
         Optional<LibraryItem> allItemsHavingSameName = this.findLibraryItem(this.allLibraryItems, libraryItemName);
         Optional<LibraryItem> checkedOutItem = allItemsHavingSameName.filter(libraryItem -> libraryItem.getClass().equals(itemType));
         checkedOutItem.ifPresent(libraryItem -> this.moveLibraryItem(this.allLibraryItems, this.checkedOutLibraryItems, libraryItem));
+        checkedOutItem.ifPresent(libraryItem -> this.register.put(libraryItem, this.currentUser));
         return checkedOutItem;
     }
 
@@ -54,6 +58,20 @@ public class Biblioteca {
         Optional<LibraryItem> returnItem = allItemsHavingSameName.filter(libraryItem -> libraryItem.getClass().equals(itemType));
         returnItem.ifPresent(item -> moveLibraryItem(this.checkedOutLibraryItems, this.allLibraryItems, item));
         return returnItem.isPresent();
+    }
+
+    public boolean currentUserCheckedOutItem(Class<? extends LibraryItem> type, String itemName) {
+        Optional<LibraryItem> item = this.checkedOutLibraryItems
+                .stream()
+                .filter(libraryItem -> libraryItem.getClass() == type)
+                .filter(libraryItem -> libraryItem.hasSameName(itemName))
+                .findFirst();
+        return item.isPresent() && this.register.get(item.get()).equals(this.currentUser);
+    }
+
+    public boolean isItemCheckedOut(Class<? extends LibraryItem> itemType, String itemName) {
+        Optional<LibraryItem> libraryItem = this.findLibraryItem(checkedOutLibraryItems, itemName);
+        return libraryItem.map(libraryItem1 -> libraryItem1.getClass().equals(itemType)).orElse(false);
     }
 
     private void moveLibraryItem(List<LibraryItem> source, List<LibraryItem> destination, LibraryItem libraryItem) {
@@ -90,5 +108,4 @@ public class Biblioteca {
     private boolean hasUser(User currentUser) {
         return this.users.stream().anyMatch(user -> user.equals(currentUser));
     }
-
 }
