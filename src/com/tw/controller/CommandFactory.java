@@ -91,10 +91,7 @@ public class CommandFactory {
     }
 
     private boolean isLoginCommandActsAsExitCommand(LoginCommand command) {
-        if (command.loginSuccessful()) {
-            return true;
-        }
-        return false;
+        return command.loginSuccessful();
     }
 
 }
