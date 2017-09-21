@@ -20,7 +20,7 @@ class InvalidCommandTest {
     }
 
     @Test
-    void displaySelectValidOptionWhenWeChooseInvalidOption() {
+    void shouldDisplaySelectValidOptionWhenWeChooseInvalidOption() {
         String selectValidOption = "Select a valid option!";
 
         invalidCommand.execute();
@@ -30,7 +30,7 @@ class InvalidCommandTest {
 
 
     @Test
-    void shouldReturnCheckoutBookAsNameOfCommand() {
+    void shouldReturnRepresentationOfInvalidCommand() {
         String name = "";
         assertEquals(name, this.invalidCommand.representation());
     }

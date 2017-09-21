@@ -67,7 +67,7 @@ public class ReturnMovieCommandTest {
     }
 
     @Test
-    void shouldReturnNameOfCommandAsReturnMovie() {
+    void shouldReturnRepresentationOfReturnMovieCommand() {
         String expected = "Return Movie";
         assertEquals(expected, this.returnMovieCommand.representation());
     }

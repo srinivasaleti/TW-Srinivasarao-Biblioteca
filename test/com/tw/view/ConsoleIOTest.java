@@ -24,7 +24,7 @@ class ConsoleIOTest {
     }
 
     @Test
-    void displayHello() {
+    void shouldDisplayHello() {
         String hello = "Hello";
 
         this.consoleIO.println(hello);
@@ -33,7 +33,7 @@ class ConsoleIOTest {
     }
 
     @Test
-    void displayWorld() {
+    void shouldDisplayWorld() {
         String world = "World";
 
         this.consoleIO.println(world);
@@ -42,7 +42,7 @@ class ConsoleIOTest {
     }
 
     @Test
-    void displayHelloWithOutLine() {
+    void shouldDisplayHelloWithOutLine() {
         String hello = "Hello";
 
         this.consoleIO.print(hello);
@@ -51,7 +51,7 @@ class ConsoleIOTest {
     }
 
     @Test
-    void displayWorldWithOutLine() {
+    void shouldDisplayWorldWithOutLine() {
         String world = "World";
 
         this.consoleIO.print(world);
@@ -60,7 +60,7 @@ class ConsoleIOTest {
     }
 
     @Test
-    void readInputFromUser() {
+    void shouldReadInputFromUser() {
         String input = "input";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -71,7 +71,7 @@ class ConsoleIOTest {
     }
 
     @Test
-    void readAnotherInputFromUser() {
+    void shouldReadAnotherInputFromUser() {
         String anotherInput = "anotherInput";
         InputStream in = new ByteArrayInputStream(anotherInput.getBytes());
         System.setIn(in);

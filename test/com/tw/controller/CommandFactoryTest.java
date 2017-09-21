@@ -177,7 +177,7 @@ class CommandFactoryTest {
     }
 
     @Test
-    void shouldReturnFotANonExistCommandOfMenu() {
+    void shouldReturnFalseForANonExitCommandOfMenu() {
         Biblioteca biblioteca = mock(Biblioteca.class);
         IO io = mock(IO.class);
         assertAll(() -> {

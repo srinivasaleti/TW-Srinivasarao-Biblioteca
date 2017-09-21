@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BookTest {
 
     @Test
-    void expectedRepresentationOfHalfGirlFriend() {
+    void shouldReturnRepresentationOfHalfGirlFriend() {
         String name = "Half GirlFriend";
         String author = "Chetan Bhagat";
         int yearPublished = 2014;
@@ -19,7 +19,7 @@ class BookTest {
     }
 
     @Test
-    void expectedRepresentationOfTrueLove() {
+    void shouldReturnRepresentationOfTrueLove() {
         String name = "True Love";
         String author = "Chetan Bhagat";
         int yearPublished = 2014;
@@ -31,28 +31,28 @@ class BookTest {
     }
 
     @Test
-    void bookIsNotEqualToNull() {
+    void shouldReturnFalseWhenVerifyingEqualityBetweenBookAndNull() {
         Book aBook = new Book("True Love", "ChetanBhagat", 2014);
 
         assertFalse(aBook.equals(null));
     }
 
     @Test
-    void bookIsNotEqualToString() {
+    void shouldReturnFalseWhenVerifyingEqualityBetweenBookAndString() {
         Book aBook = new Book("True Love", "ChetanBhagat", 2014);
 
         assertFalse(aBook.equals("aBook"));
     }
 
     @Test
-    void bookIsEqualToItSelf() {
+    void shouldReturnTrueWhenVerifyingEqualityBetweenBookAndItSelf() {
         Book aBook = new Book("True Love", "ChetanBhagat", 2014);
 
         assertTrue(aBook.equals(aBook));
     }
 
     @Test
-    void bookIsEqualToSameBook() {
+    void shouldReturnTrueWhenVerifyingEqualityBetweenBookAndSameBook() {
         Book aBook = new Book("True Love", "ChetanBhagat", 2014);
         Book sameBook = new Book("True Love", "ChetanBhagat", 2014);
 

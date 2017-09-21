@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BibliotecaTest {
 
     @Test
-    void expectedNothingWhenThereAreNoLibraryItemsInLibrary() {
+    void shouldReturnNothingWhenThereAreNoLibraryItemsInLibrary() {
         Biblioteca biblioteca = new Biblioteca(null, null);
         String nothing = "";
 

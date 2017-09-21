@@ -73,7 +73,7 @@ class ListMoviesCommandTest {
     }
 
     @Test
-    void shouldReturnsListMoviesAsNameOfCommand() {
+    void shouldReturnRepresentationOfListMoviesCommand() {
         assertEquals("List Movies", this.listMoviesCommand.representation());
     }
 

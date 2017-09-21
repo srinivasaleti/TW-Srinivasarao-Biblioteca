@@ -38,7 +38,7 @@ class BibliotecaAppTest {
     }
 
     @Test
-    void displayWelcomeMessage() {
+    void shouldDisplayWelcomeMessage() {
         String welcomeMessage = "Welcome to Bangalore Public Library";
         this.bibliotecaApp.run();
 

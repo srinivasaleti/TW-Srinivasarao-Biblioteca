@@ -10,7 +10,7 @@ import static org.mockito.Mockito.verify;
 class QuitCommandTest {
 
     @Test
-    void displayThankYouMessageWhenUserQuitTheApplication() {
+    void shouldDisplayThankYouMessageWhenUserQuitTheApplication() {
         IO io = mock(IO.class);
         QuitCommand quitCommand = new QuitCommand(io);
         String thankYouMessage = "Thank you for your valuable time";
@@ -21,7 +21,7 @@ class QuitCommandTest {
     }
 
     @Test
-    void shouldReturnQuitAsNameOfCommand() {
+    void shouldReturnRepresentationOfQuitCommand() {
         IO io = mock(IO.class);
         QuitCommand quitCommand = new QuitCommand(io);
         String quit = "Quit";

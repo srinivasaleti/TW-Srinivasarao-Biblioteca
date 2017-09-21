@@ -94,7 +94,7 @@ public class CheckoutMovieCommandTest {
     }
 
     @Test
-    void shouldReturnsCheckoutBookAsNameOfCommand() {
+    void shouldReturnRepresentationOfCheckoutMovieCommand() {
         String expected = "Checkout Movie";
         assertEquals(expected, this.checkoutMovieCommand.representation());
     }

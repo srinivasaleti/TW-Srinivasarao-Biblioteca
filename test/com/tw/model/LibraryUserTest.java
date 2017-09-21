@@ -26,22 +26,22 @@ public class LibraryUserTest {
     }
 
     @Test
-    void shouldReturnFalseWhenVerifyEqualityBetweenUserAndNull() {
+    void shouldReturnFalseWhenVerifyEqualityBetweenLibraryUserAndNull() {
         assertFalse(this.libraryUser.equals(null));
     }
 
     @Test
-    void shouldReturnFalseWhenVerifyEqualityBetweenUserAndString() {
+    void shouldReturnFalseWhenVerifyEqualityBetweenLibraryUserAndString() {
         assertFalse(this.libraryUser.equals("libraryUser"));
     }
 
     @Test
-    void shouldReturnFalseWhenVerifyEqualityBetweenUserAndStringHimSelf() {
+    void shouldReturnTrueWhenVerifyEqualityBetweenLibraryUserAndItSelf() {
         assertTrue(this.libraryUser.equals(this.libraryUser));
     }
 
     @Test
-    void shouldReturnFalseWhenVerifyEqualityBetweenUserAndAnotherSameUser() {
+    void shouldReturnTrueWhenVerifyEqualityBetweenLibraryUserAndAnotherSameLibraryUser() {
         User sameUser = new LibraryUser("srinu", "123-123424", "1234", "srinivas.aleti03@gmail.com", "9848981244");
         assertTrue(this.libraryUser.equals(sameUser));
     }

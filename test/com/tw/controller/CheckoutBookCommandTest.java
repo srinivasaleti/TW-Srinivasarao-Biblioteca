@@ -86,7 +86,7 @@ class CheckoutBookCommandTest {
     }
 
     @Test
-    void shouldReturnCheckoutBookAsNameOfCommand() {
+    void shouldReturnRepresentationOfCheckoutBookCommand() {
         String expected = "Checkout Book";
         assertEquals(expected, this.checkoutBookCommand.representation());
     }

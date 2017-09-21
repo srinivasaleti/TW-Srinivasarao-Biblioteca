@@ -24,7 +24,7 @@ class ListBooksCommandTest {
     }
 
     @Test
-    void shouldDisplayNoBooksAvailableIfBibliotecaThereAreNoBooksInBiblioteca() {
+    void shouldDisplayNoBooksAvailableIfThereAreNoBooksInBiblioteca() {
         String noBooksAvailable = "No Books Available";
 
         when(this.biblioteca.isEmpty(Book.class)).thenReturn(true);
@@ -68,7 +68,7 @@ class ListBooksCommandTest {
     }
 
     @Test
-    void shouldReturnsListBooksAsNameOfCommand() {
+    void shouldReturnRepresentationOfListBookCommand() {
         String expected = "List Books";
         assertEquals(expected, this.listBooks.representation());
     }

@@ -67,7 +67,7 @@ class ReturnBookCommandTest {
     }
 
     @Test
-    void shouldReturnNameOfCommandAsReturnBook() {
+    void shouldReturnRepresentationOfReturnBookCommand() {
         String expected = "Return Book";
         assertEquals(expected, this.returnBookCommand.representation());
     }
