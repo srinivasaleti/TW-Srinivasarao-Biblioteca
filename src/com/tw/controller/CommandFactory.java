@@ -57,7 +57,7 @@ public class CommandFactory {
             return true;
         }
         if (command instanceof LoginCommand) {
-            return true;
+            return isLoginCommandActsAsExitCommand((LoginCommand) command);
         }
         if (command instanceof LogoutCommand) {
             return true;
@@ -88,6 +88,13 @@ public class CommandFactory {
     private void appendQuitCommandRepresentationTo(StringBuilder result) {
         result.append(TYPE_QUIT_TO_EXIT);
         result.append(LINE_SEPARATOR);
+    }
+
+    private boolean isLoginCommandActsAsExitCommand(LoginCommand command) {
+        if (command.loginSuccessful()) {
+            return true;
+        }
+        return false;
     }
 
 }

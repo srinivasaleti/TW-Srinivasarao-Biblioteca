@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class LoginCommandTest {
@@ -95,6 +95,30 @@ class LoginCommandTest {
     void shouldReturnRepresentationOfLoginCommand() {
         String login = "Login";
         assertEquals(login, this.loginCommand.representation());
+    }
+
+    @Test
+    void shouldReturnTrueForSuccessfulLogin() {
+        String libraryNo = "libraryNo";
+        String password = "password";
+
+        when(this.io.getInput()).thenReturn(libraryNo, password);
+        when(this.biblioteca.userWithGivenCredentials(libraryNo, password)).thenReturn(Optional.of(this.user));
+        this.loginCommand.execute();
+
+        assertTrue(this.loginCommand.loginSuccessful());
+    }
+
+    @Test
+    void shouldReturnFalseForUnSuccessfulLogin() {
+        String libraryNo = "libraryNo";
+        String password = "password";
+
+        when(this.io.getInput()).thenReturn(libraryNo, password);
+        when(this.biblioteca.userWithGivenCredentials(libraryNo, password)).thenReturn(Optional.empty());
+        this.loginCommand.execute();
+
+        assertFalse(this.loginCommand.loginSuccessful());
     }
 
 }
