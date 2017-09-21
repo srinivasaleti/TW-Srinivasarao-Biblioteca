@@ -8,4 +8,15 @@ public class GuestUser implements User {
         return false;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        return this.getClass() == obj.getClass();
+    }
+
 }

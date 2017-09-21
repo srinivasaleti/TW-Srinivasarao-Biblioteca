@@ -218,4 +218,11 @@ class BibliotecaTest {
         assertFalse(biblioteca.changeCurrentUser(notExistingUser));
     }
 
+    @Test
+    void shouldChangeCurrentUserOfBibliotecaToGuestUser() {
+        Biblioteca biblioteca = new Biblioteca(null, null);
+
+        assertTrue(biblioteca.changeCurrentUser(new GuestUser()));
+    }
+
 }

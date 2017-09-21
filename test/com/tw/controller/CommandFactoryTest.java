@@ -173,7 +173,7 @@ class CommandFactoryTest {
 
     @Test
     void shouldReturnTrueForVerifyingWhetherLogoutCommandIsExistCommandOfMenuOrNot() {
-        assertTrue(this.commandFactory.isExitCommandForMenu(new LogoutCommand(mock(IO.class), mock(Menu.class))));
+        assertTrue(this.commandFactory.isExitCommandForMenu(new LogoutCommand(mock(Biblioteca.class), mock(IO.class), mock(Menu.class))));
     }
 
     @Test

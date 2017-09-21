@@ -72,6 +72,14 @@ public class Biblioteca {
     }
 
     public boolean changeCurrentUser(User user) {
+        if (user instanceof GuestUser) {
+            this.currentUser = user;
+            return true;
+        }
+        return changeUserToANonGuestUser(user);
+    }
+
+    private boolean changeUserToANonGuestUser(User user) {
         if (!hasUser(user)) {
             return false;
         }

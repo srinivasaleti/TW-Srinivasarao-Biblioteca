@@ -1,5 +1,7 @@
 package com.tw.controller;
 
+import com.tw.model.Biblioteca;
+import com.tw.model.GuestUser;
 import com.tw.view.IO;
 
 //Represents a command which is responsible for logout
@@ -10,16 +12,19 @@ public class LogoutCommand implements Command {
 
     private final IO io;
     private final Menu menuForGuestUser;
+    private final Biblioteca biblioteca;
 
-    public LogoutCommand(IO io, Menu menuForGuestUser) {
+    public LogoutCommand(Biblioteca biblioteca, IO io, Menu menuForGuestUser) {
         this.io = io;
         this.menuForGuestUser = menuForGuestUser;
+        this.biblioteca = biblioteca;
     }
 
     @Override
     public void execute() {
         this.io.println(THANKS_FOR_YOUR_VALUABLE_TIME);
         this.menuForGuestUser.menuSelection();
+        this.biblioteca.changeCurrentUser(new GuestUser());
     }
 
     @Override

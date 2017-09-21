@@ -26,7 +26,7 @@ public class App {
         Menu menuForLibraryUser = new Menu(commandFactoryLibraryUser, io);
         LoginCommand loginCommand = new LoginCommand(biblioteca, io, menuForLibraryUser);
         Menu menuForGuestUser = new Menu(commandFactoryGuestUser, io);
-        LogoutCommand logoutCommand = new LogoutCommand(io, menuForGuestUser);
+        LogoutCommand logoutCommand = new LogoutCommand(biblioteca, io, menuForGuestUser);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(io, commandsForGuestUser, commandsForLibraryMember, loginCommand, logoutCommand, menuForGuestUser);
         bibliotecaApp.run();
