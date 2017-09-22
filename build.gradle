@@ -48,9 +48,6 @@ dependencies {
 }
 jar {
     manifest.
-    attributes('Main-Class' : 'com.tw.Runner')
-}
-run{
-    standardInput = System.in
+    attributes('Main-Class' : 'com.tw.App')
 }
 mainClassName = 'com.tw.App'
