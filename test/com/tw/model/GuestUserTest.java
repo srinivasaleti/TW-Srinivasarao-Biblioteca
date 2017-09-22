@@ -3,8 +3,7 @@ package com.tw.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GuestUserTest {
 
@@ -34,6 +33,17 @@ public class GuestUserTest {
     void shouldReturnTrueWhenVerifyEqualityBetweenGuestUserAndAnotherGuestUser() {
         GuestUser sameUser = new GuestUser();
         assertTrue(this.guestUser.equals(sameUser));
+    }
+
+    @Test
+    void shouldReturnFalseForVerifyingGuestUserHasCredentials() {
+        assertFalse(this.guestUser.hasSameCredentials("any", "any"));
+    }
+
+    @Test
+    void shouldReturnsRepresentationOfGuestUser() {
+        String expected = "Guest user";
+        assertEquals(expected, this.guestUser.representation());
     }
 
 }

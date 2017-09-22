@@ -5,4 +5,6 @@ public interface User {
 
     boolean hasSameCredentials(String libraryNo, String password);
 
+    String representation();
+
 }

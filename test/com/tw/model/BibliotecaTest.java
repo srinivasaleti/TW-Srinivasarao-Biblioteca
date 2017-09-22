@@ -268,7 +268,6 @@ class BibliotecaTest {
     void shouldNotChangeCurrentUserOfBibliotecaIfHeIsNotInUserList() {
         User existingUser = new LibraryUser("ramu", "111-1111", "Ab3@password", "srinivas.aleti03@gmail.com", "9838918493");
         User notExistingUser = new LibraryUser("srinu", "123-1234", "Xy2@password", "srinivas.aleti03@gmail.com", "9838918493");
-
         List<User> users = Collections.singletonList(existingUser);
         Biblioteca biblioteca = new Biblioteca(null, users);
 
@@ -280,6 +279,18 @@ class BibliotecaTest {
         Biblioteca biblioteca = new Biblioteca(null, null);
 
         assertTrue(biblioteca.changeCurrentUser(new GuestUser()));
+    }
+
+    @Test
+    void shouldGetCurrentUserOfBiblioteca() {
+        User user = new LibraryUser("ramu", "111-1111", "Ab3@password", "srinivas.aleti03@gmail.com", "9838918493");
+        User anotherUser = new LibraryUser("srinu", "123-1234", "Xy2@password", "srinivas.aleti03@gmail.com", "9838918493");
+        List<User> users = Arrays.asList(user, anotherUser);
+        Biblioteca biblioteca = new Biblioteca(null, users);
+
+        biblioteca.changeCurrentUser(user);
+
+        assertEquals(user, biblioteca.currentUser());
     }
 
 }

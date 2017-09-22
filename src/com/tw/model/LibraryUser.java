@@ -3,6 +3,8 @@ package com.tw.model;
 //Represents a user who registered with biblioteca
 public class LibraryUser implements User {
 
+    private static final String REPRESENTATION_FORMAT = "%-35s %-35s %-35s";
+
     private final String name;
     private final String libraryNo;
     private final String password;
@@ -20,6 +22,11 @@ public class LibraryUser implements User {
     @Override
     public boolean hasSameCredentials(String libraryNo, String password) {
         return this.libraryNo.equals(libraryNo) && this.password.equals(password);
+    }
+
+    @Override
+    public String representation() {
+        return String.format(REPRESENTATION_FORMAT, this.name, this.email, this.phoneNumber);
     }
 
     @Override

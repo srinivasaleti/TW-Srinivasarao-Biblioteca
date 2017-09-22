@@ -91,6 +91,10 @@ public class Biblioteca {
         return changeUserToANonGuestUser(user);
     }
 
+    public User currentUser() {
+        return this.currentUser;
+    }
+
     private Optional<LibraryItem> findLibraryItem(List<LibraryItem> libraryItems, String libraryItemName) {
         return libraryItems.stream()
                 .filter(libraryItem -> libraryItem.hasSameName(libraryItemName))
@@ -108,4 +112,5 @@ public class Biblioteca {
     private boolean hasUser(User currentUser) {
         return this.users.stream().anyMatch(user -> user.equals(currentUser));
     }
+
 }

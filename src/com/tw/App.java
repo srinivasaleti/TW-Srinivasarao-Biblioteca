@@ -48,21 +48,23 @@ public class App {
         CheckoutMovieCommand checkoutMovieCommand = new CheckoutMovieCommand(biblioteca, io);
         ReturnBookCommand returnBookCommand = new ReturnBookCommand(biblioteca, io);
         ReturnMovieCommand returnMovieCommand = new ReturnMovieCommand(biblioteca, io);
+        DisplayUserDetailsCommand displayUserDetailsCommand = new DisplayUserDetailsCommand(biblioteca, io);
 
         List<Command> commands = Arrays.asList(listBooksCommand, checkoutBookCommand,
-                returnBookCommand, listMoviesCommand, checkoutMovieCommand, returnMovieCommand);
+                returnBookCommand, listMoviesCommand, checkoutMovieCommand, returnMovieCommand, displayUserDetailsCommand);
         return new ArrayList<>(commands);
     }
 
     private static ArrayList<Command> seedCommandsForGuestUser(Biblioteca biblioteca, IO io) {
         ListBooksCommand listBooksCommand = new ListBooksCommand(biblioteca, io);
         ListMoviesCommand listMoviesCommand = new ListMoviesCommand(biblioteca, io);
+
         return new ArrayList<>(Arrays.asList(listBooksCommand, listMoviesCommand));
     }
 
     private static List<User> seedUsers() {
         User user1 = new LibraryUser("srinu", "123-1234", "Xy2@password", "srinivas.aleti03@gmail.com", "9838918493");
-        User user2 = new LibraryUser("ramu", "111-1111", "Ab3@password", "srinivas.aleti03@gmail.com", "9838918493");
+        User user2 = new LibraryUser("ramu", "111-1111", "Ab3@password", "ramu.hello@gmail.com", "9838918493");
 
         return Arrays.asList(user1, user2);
     }
