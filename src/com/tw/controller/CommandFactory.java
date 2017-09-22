@@ -59,10 +59,7 @@ public class CommandFactory {
         if (command instanceof LoginCommand) {
             return isLoginCommandActsAsExitCommand((LoginCommand) command);
         }
-        if (command instanceof LogoutCommand) {
-            return true;
-        }
-        return false;
+        return command instanceof LogoutCommand;
     }
 
     private boolean indexIsInsideListBounds(int index) {
