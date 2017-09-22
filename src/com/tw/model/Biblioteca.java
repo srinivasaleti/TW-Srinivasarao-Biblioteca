@@ -46,37 +46,25 @@ public class Biblioteca {
     }
 
     public Optional<LibraryItem> checkoutALibraryItem(Class<? extends LibraryItem> itemType, String libraryItemName) {
-        Optional<LibraryItem> allItemsHavingSameName = this.findLibraryItem(this.allLibraryItems, libraryItemName);
-        Optional<LibraryItem> checkedOutItem = allItemsHavingSameName.filter(libraryItem -> libraryItem.getClass().equals(itemType));
+        Optional<LibraryItem> checkedOutItem = this.findLibraryItem(this.allLibraryItems, itemType, libraryItemName);
         checkedOutItem.ifPresent(libraryItem -> this.moveLibraryItem(this.allLibraryItems, this.checkedOutLibraryItems, libraryItem));
         checkedOutItem.ifPresent(libraryItem -> this.register.put(libraryItem, this.currentUser));
         return checkedOutItem;
     }
 
     public boolean returnLibraryItem(Class<? extends LibraryItem> itemType, String libraryItemName) {
-        Optional<LibraryItem> allItemsHavingSameName = this.findLibraryItem(this.checkedOutLibraryItems, libraryItemName);
-        Optional<LibraryItem> returnItem = allItemsHavingSameName.filter(libraryItem -> libraryItem.getClass().equals(itemType));
+        Optional<LibraryItem> returnItem = this.findLibraryItem(this.checkedOutLibraryItems, itemType, libraryItemName);
         returnItem.ifPresent(item -> moveLibraryItem(this.checkedOutLibraryItems, this.allLibraryItems, item));
         return returnItem.isPresent();
     }
 
     public boolean currentUserCheckedOutItem(Class<? extends LibraryItem> type, String itemName) {
-        Optional<LibraryItem> item = this.checkedOutLibraryItems
-                .stream()
-                .filter(libraryItem -> libraryItem.getClass() == type)
-                .filter(libraryItem -> libraryItem.hasSameName(itemName))
-                .findFirst();
+        Optional<LibraryItem> item = findLibraryItem(this.checkedOutLibraryItems, type, itemName);
         return item.isPresent() && this.register.get(item.get()).equals(this.currentUser);
     }
 
     public boolean isItemCheckedOut(Class<? extends LibraryItem> itemType, String itemName) {
-        Optional<LibraryItem> libraryItem = this.findLibraryItem(checkedOutLibraryItems, itemName);
-        return libraryItem.map(libraryItem1 -> libraryItem1.getClass().equals(itemType)).orElse(false);
-    }
-
-    private void moveLibraryItem(List<LibraryItem> source, List<LibraryItem> destination, LibraryItem libraryItem) {
-        source.remove(libraryItem);
-        destination.add(libraryItem);
+        return this.findLibraryItem(this.checkedOutLibraryItems, itemType, itemName).isPresent();
     }
 
     public Optional<User> userWithGivenCredentials(String libraryNo, String password) {
@@ -95,9 +83,15 @@ public class Biblioteca {
         return this.currentUser;
     }
 
-    private Optional<LibraryItem> findLibraryItem(List<LibraryItem> libraryItems, String libraryItemName) {
+    private void moveLibraryItem(List<LibraryItem> source, List<LibraryItem> destination, LibraryItem libraryItem) {
+        source.remove(libraryItem);
+        destination.add(libraryItem);
+    }
+
+    private Optional<LibraryItem> findLibraryItem(List<LibraryItem> libraryItems, Class<? extends LibraryItem> itemType, String libraryItemName) {
         return libraryItems.stream()
                 .filter(libraryItem -> libraryItem.hasSameName(libraryItemName))
+                .filter(libraryItem -> libraryItem.getClass() == itemType)
                 .findFirst();
     }
 

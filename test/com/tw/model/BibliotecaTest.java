@@ -216,7 +216,6 @@ class BibliotecaTest {
         Biblioteca biblioteca = new Biblioteca(libraryItems, null);
 
         biblioteca.checkoutALibraryItem(Book.class, name);
-        biblioteca.checkoutALibraryItem(Movie.class, name);
 
         assertFalse(biblioteca.returnLibraryItem(Movie.class, name));
     }
