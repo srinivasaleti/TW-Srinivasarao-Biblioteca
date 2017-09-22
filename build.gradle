@@ -1,0 +1,56 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'org.junit.platform.gradle.plugin'
+
+sourceSets {
+    main.java.srcDir("src/")
+    test.java.srcDir("test/")
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-RC2'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext.junitPlatformVersion = '1.0.0-RC2'
+ext.junitJupiterVersion = '5.0.0-RC2'
+ext.log4jVersion = '2.6.2'
+
+compileTestJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    options.compilerArgs += '-parameters'
+}
+
+junitPlatform {
+    logManager 'org.apache.logging.log4j.jul.LogManager'
+}
+
+dependencies {
+    testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+
+    testRuntime("org.apache.logging.log4j:log4j-core:${log4jVersion}")
+    testRuntime("org.apache.logging.log4j:log4j-jul:${log4jVersion}")
+
+    // Only needed to run tests in an (IntelliJ) IDE(A) that bundles an older version
+    testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}")
+
+    testCompile 'org.mockito:mockito-all:1.10.19'
+}
+jar {
+    manifest.
+    attributes('Main-Class' : 'com.tw.Runner')
+}
+run{
+    standardInput = System.in
+}
+mainClassName = 'com.tw.App'
