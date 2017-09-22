@@ -1,8 +1,8 @@
 clone project using
 
-https://gitlab.com/srinu183/TW-Srinivasarao-Biblioteca
+https://github.com/srinivasaleti/TW-Srinivasarao-Biblioteca
 
-It is a gradle project follow below commands to run project
+It is a gradle project follow bellow commands to run project
 
 
 ------------------
