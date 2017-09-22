@@ -42,3 +42,15 @@ Jar created at ../build/libs
 -> Navigate to project structure
 
 -> java -jar build/libs/TW-Srinivasarao-Biblioteca.jar      (run this command)
+
+
+--------------
+Default credentials
+
+library number :111-1111
+password       :Ab3@password
+
+
+library number :123-1234
+password       :Xy2@password
+
