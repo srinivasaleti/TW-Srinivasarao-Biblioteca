@@ -15,12 +15,12 @@ public abstract class ReturnItemAction {
     private final Biblioteca biblioteca;
     private final IO io;
 
-    ReturnItemAction(Biblioteca biblioteca, IO io, String enterItemName, String successfulReturnMessage, String itemNotCheckedoutMessage, String notAValidUserMessage) {
+    ReturnItemAction(Biblioteca biblioteca, IO io, String enterItemName, String successfulReturnMessage, String itemNotCheckedOutMessage, String notAValidUserMessage) {
         this.biblioteca = biblioteca;
         this.io = io;
         this.enterItemName = enterItemName;
         this.successfulReturnMessage = successfulReturnMessage;
-        this.itemNotCheckedOutMessage = itemNotCheckedoutMessage;
+        this.itemNotCheckedOutMessage = itemNotCheckedOutMessage;
         this.notAValidUserMessage = notAValidUserMessage;
     }
 
