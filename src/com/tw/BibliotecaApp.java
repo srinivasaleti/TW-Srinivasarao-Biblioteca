@@ -8,7 +8,7 @@ import com.tw.view.IO;
 
 import java.util.List;
 
-//Represents a set up for application
+//Represents a starting point for biblioteca
 public class BibliotecaApp {
 
     private static final String WELCOME_MESSAGE = "Welcome to Bangalore Public Library";
