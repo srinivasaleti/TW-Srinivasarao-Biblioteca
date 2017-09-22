@@ -13,7 +13,7 @@ To run tests
 
 -> Navigate to project structure
 
--> type "./gradlew build" without quotes and press enter
+-> type "gradle build" without quotes and press enter
 
 
 
